@@ -67,8 +67,18 @@
     src: "{{ artifact_dest }}"
     dest: "{{ build_env_path }}"
 
-- name: Check the created dirs
+- name: Вывести содержимое корневого каталога
+  shell: ls -la /
+  register: ls_root
+
+- name: Показать результат
   debug:
-    msg: |
-      ls -la /
-      ls -laR /build_env
+    var: ls_root.stdout_lines
+
+- name: Вывести рекурсивное содержимое /build_env
+  shell: ls -laR /build_env
+  register: ls_build_env
+
+- name: Показать результат
+  debug:
+    var: ls_build_env.stdout_lines
