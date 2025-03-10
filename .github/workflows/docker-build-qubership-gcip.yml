@@ -1,11 +1,11 @@
-name: Create and publish qubership_build_effective_set_generator Docker image
+name: Create and publish qubership-gcip docker image
 
 on:
   workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: netcracker/qubership-build-effective-set-generator
+  IMAGE_NAME: netcracker/qubership-gcip
 
 jobs:
   build-and-push-image:
@@ -37,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./build_effective_set_generator/build/Dockerfile
+          file: ./build_gcip/build/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
