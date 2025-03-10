@@ -61,3 +61,8 @@
     password:       "{{ repository_password }}"
     dest:           "{{ artifact_dest }}"
     extension: zip
+
+- name: Unpack an artifact
+  unarchive:
+    src: "{{ artifact_dest }}"
+    dest: "{{ build_env_path }}"
