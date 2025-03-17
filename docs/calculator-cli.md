@@ -25,7 +25,7 @@
    2. Calculator CLI must generate Effective Set with technical parameters (technical-configuration-parameters.yaml)
    3. Calculator CLI must generate Effective Set with e2e parameters
    4. Calculator CLI must generate Effective Set with sensitive parameters (credentials.yaml)
-2. Calculator CLI must process [execution attributes](#calculator-cli-execution-attributes)  
+2. Calculator CLI must process [execution attributes](#calculator-cli-execution-attributes)
 3. Calculator CLI must not encrypt or decrypt sensitive parameters (credentials.yaml)
 4. Calculator CLI must resolve [macros](#macros)
 5. Calculator CLI should not process Parameter Sets
@@ -79,7 +79,7 @@ Below is a **complete** list of attributes
         └── <environment-name-01>
             └── effective-set
                 ├── mapping.yml
-                ├── <deployPostfix-01> # from Solution Descriptor
+                ├── <deployPostfix-01>
                 |   ├── e2e-parameters.yaml
                 |   ├── e2e-credentials.yaml
                 |   ├── <application-name-01>
@@ -90,16 +90,16 @@ Below is a **complete** list of attributes
                 |       ├── deployment-parameters.yaml
                 |       ├── technical-configuration-parameters.yaml
                 |       └── credentials.yaml
-                └── <deployPostfix-02> # from Solution Descriptor
+                └── <deployPostfix-02>
                     ├── e2e-parameters.yaml
-                    ├── e2e-credentials.yaml                    
+                    ├── e2e-credentials.yaml
                     ├── <application-name-01>
                     |   ├── deployment-parameters.yaml
                     |   ├── technical-configuration-parameters.yaml
                     |   └── credentials.yaml
                     └── <application-name-02>
                         ├── deployment-parameters.yaml
-                        ├── technical-configuration-parameters.yaml                   
+                        ├── technical-configuration-parameters.yaml
                         └── credentials.yaml
 ```
 
