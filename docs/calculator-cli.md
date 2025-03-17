@@ -109,6 +109,8 @@ Below is a **complete** list of attributes
 
 This file's parameters define a **distinct** context for rendering Helm manifests.
 
+Follows this structure:
+
 ```yaml
 global: # Optional
   <key>: <value>
@@ -119,6 +121,8 @@ global: # Optional
 
 #### technical-configuration-parameters.yaml
 
+Follows this structure:
+
 ```yaml
 <key>: <value>
 ```
@@ -127,6 +131,8 @@ global: # Optional
 
 This file's parameters create a **distinct** parameter context used for managing environment lifecycle systems, like deployment orchestrators or CI procedures.
 This context is formed by parameters defined in the ``e2eParameters`` sections of the ``Cloud`` and ``Namespace`` environment instance objects. If parameters are defined on both objects, the parameters defined on the ``Namespace`` take precedence.
+
+Follows this structure:
 
 ```yaml
 <key>: <value>
