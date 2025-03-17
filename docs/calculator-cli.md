@@ -84,26 +84,24 @@ Below is a **complete** list of attributes
             └── effective-set
                 ├── mapping.yml
                 ├── <deployPostfix-01> # from Solution Descriptor
+                |   ├── e2e-parameters.yaml
                 |   ├── <application-name-01>
                 |   |   ├── deployment-parameters.yaml
                 |   |   ├── technical-configuration-parameters.yaml
-                |   |   ├── e2e-parameters.yaml
                 |   |   └── credentials.yaml
                 |   └── <application-name-02>
                 |       ├── deployment-parameters.yaml
                 |       ├── technical-configuration-parameters.yaml
-                |       ├── e2e-parameters.yaml
                 |       └── credentials.yaml
                 └── <deployPostfix-02> # from Solution Descriptor
+                    ├── e2e-parameters.yaml
                     ├── <application-name-01>
                     |   ├── deployment-parameters.yaml
                     |   ├── technical-configuration-parameters.yaml
-                    |   ├── e2e-parameters.yaml
                     |   └── credentials.yaml
                     └── <application-name-02>
                         ├── deployment-parameters.yaml
-                        ├── technical-configuration-parameters.yaml
-                        ├── e2e-parameters.yaml                      
+                        ├── technical-configuration-parameters.yaml                   
                         └── credentials.yaml
 ```
 
@@ -128,6 +126,7 @@ global: # Optional
 #### e2e-parameters.yaml
 
 This file's parameters create a **distinct** parameter context used for managing environment lifecycle systems, like deployment orchestrators or CI procedures.
+This context is formed by parameters defined in the ``e2eParameters`` sections of the ``Cloud`` and ``Namespace`` environment instance objects. If parameters are defined on both objects, the parameters defined on the ``Namespace`` take precedence.
 
 ```yaml
 <key>: <value>
