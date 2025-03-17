@@ -11,7 +11,7 @@
       - [Effective Set Structure](#effective-set-structure)
       - [deployment-parameters.yaml](#deployment-parametersyaml)
       - [technical-configuration-parameters.yaml](#technical-configuration-parametersyaml)
-      - [e2e-parameters.yaml](#e2e-parametersyaml)
+      - [e2e Parameters](#e2e-parameters)
       - [mapping.yml](#mappingyml)
     - [Macros](#macros)
     - [Parameters in Effective Set don't Originate from Environment Instance](#parameters-in-effective-set-dont-originate-from-environment-instance)
@@ -85,6 +85,7 @@ Below is a **complete** list of attributes
                 ├── mapping.yml
                 ├── <deployPostfix-01> # from Solution Descriptor
                 |   ├── e2e-parameters.yaml
+                |   ├── e2e-credentials.yaml
                 |   ├── <application-name-01>
                 |   |   ├── deployment-parameters.yaml
                 |   |   ├── technical-configuration-parameters.yaml
@@ -95,6 +96,7 @@ Below is a **complete** list of attributes
                 |       └── credentials.yaml
                 └── <deployPostfix-02> # from Solution Descriptor
                     ├── e2e-parameters.yaml
+                |   ├── e2e-credentials.yaml                    
                     ├── <application-name-01>
                     |   ├── deployment-parameters.yaml
                     |   ├── technical-configuration-parameters.yaml
@@ -127,16 +129,25 @@ Follows this structure:
 <key>: <value>
 ```
 
-#### e2e-parameters.yaml
+#### e2e Parameters
 
-This file's parameters create a **distinct** parameter context used for managing environment lifecycle systems, like deployment orchestrators or CI procedures.
+These parameters create a **distinct** parameter context used for managing environment lifecycle systems, such as deployment orchestrators or CI procedures.
+
 This context is formed by parameters defined in the ``e2eParameters`` sections of the ``Cloud`` and ``Namespace`` environment instance objects. If parameters are defined on both objects, the parameters defined on the ``Namespace`` take precedence.
 
-Follows this structure:
+These parameters are described in two files:
+
+1. **e2e-parameters.yaml**: This file contains non-sensitive e2e parameters.
+
+2. **e2e-credentials.yaml**: This file contains sensitive e2e parameters. If a parameter is described in the Environment Template via an EnvGene credential macro, that parameter will be placed in this file.
+
+Both files have the following structure:
 
 ```yaml
 <key>: <value>
 ```
+
+The value can be complex, such as a map or a list, whose elements can also be complex.
 
 #### mapping.yml
 
