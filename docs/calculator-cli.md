@@ -11,6 +11,7 @@
       - [Effective Set Structure](#effective-set-structure)
       - [deployment-parameters.yaml](#deployment-parametersyaml)
       - [technical-configuration-parameters.yaml](#technical-configuration-parametersyaml)
+      - [e2e-parameters.yaml](#e2e-parametersyaml)
       - [mapping.yml](#mappingyml)
     - [Macros](#macros)
     - [Parameters in Effective Set don't Originate from Environment Instance](#parameters-in-effective-set-dont-originate-from-environment-instance)
@@ -26,7 +27,7 @@
 1. Calculator CLI must generate [Effective Set](#effective-set)
    1. Calculator CLI must generate Effective Set with deployment parameters (deployment-parameters.yaml)
    2. Calculator CLI must generate Effective Set with technical parameters (technical-configuration-parameters.yaml)
-   3. ~~Calculator CLI must generate Effective Set with e2e parameters (???)~~
+   3. Calculator CLI must generate Effective Set with e2e parameters
    4. Calculator CLI must generate Effective Set with sensitive parameters (credentials.yaml)
 2. Calculator CLI must process [execution attributes](#calculator-cli-execution-attributes)  
 3. Calculator CLI must not encrypt or decrypt sensitive parameters (credentials.yaml)
@@ -86,23 +87,29 @@ Below is a **complete** list of attributes
                 |   ├── <application-name-01>
                 |   |   ├── deployment-parameters.yaml
                 |   |   ├── technical-configuration-parameters.yaml
+                |   |   ├── e2e-parameters.yaml
                 |   |   └── credentials.yaml
                 |   └── <application-name-02>
                 |       ├── deployment-parameters.yaml
                 |       ├── technical-configuration-parameters.yaml
+                |       ├── e2e-parameters.yaml
                 |       └── credentials.yaml
                 └── <deployPostfix-02> # from Solution Descriptor
                     ├── <application-name-01>
                     |   ├── deployment-parameters.yaml
                     |   ├── technical-configuration-parameters.yaml
+                    |   ├── e2e-parameters.yaml
                     |   └── credentials.yaml
                     └── <application-name-02>
                         ├── deployment-parameters.yaml
                         ├── technical-configuration-parameters.yaml
+                        ├── e2e-parameters.yaml                      
                         └── credentials.yaml
 ```
 
 #### deployment-parameters.yaml
+
+This file's parameters define a **distinct** context for rendering Helm manifests.
 
 ```yaml
 global: # Optional
@@ -113,6 +120,14 @@ global: # Optional
 ```
 
 #### technical-configuration-parameters.yaml
+
+```yaml
+<key>: <value>
+```
+
+#### e2e-parameters.yaml
+
+This file's parameters create a **distinct** parameter context used for managing environment lifecycle systems, like deployment orchestrators or CI procedures.
 
 ```yaml
 <key>: <value>
