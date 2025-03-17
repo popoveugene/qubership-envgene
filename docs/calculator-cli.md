@@ -17,10 +17,6 @@
     - [Parameters in Effective Set don't Originate from Environment Instance](#parameters-in-effective-set-dont-originate-from-environment-instance)
   - [Use Cases](#use-cases)
     - [Effective Set Calculation](#effective-set-calculation)
-  - [Validation](#validation)
-  - [Tests](#tests)
-    - [Unit Tests](#unit-tests)
-    - [e2e Tests](#e2e-tests)
 
 ## Requirements
 
@@ -96,7 +92,7 @@ Below is a **complete** list of attributes
                 |       └── credentials.yaml
                 └── <deployPostfix-02> # from Solution Descriptor
                     ├── e2e-parameters.yaml
-                |   ├── e2e-credentials.yaml                    
+                    ├── e2e-credentials.yaml                    
                     ├── <application-name-01>
                     |   ├── deployment-parameters.yaml
                     |   ├── technical-configuration-parameters.yaml
@@ -170,21 +166,5 @@ TBD
 ## Use Cases
 
 ### Effective Set Calculation
-
-TBD
-
-## Validation
-
-TBD
-
-## Tests
-
-TBD
-
-### Unit Tests
-
-TBD
-
-### e2e Tests
 
 TBD
