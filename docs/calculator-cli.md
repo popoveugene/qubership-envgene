@@ -9,9 +9,9 @@
     - [Registry Configuration](#registry-configuration)
     - [Effective Set](#effective-set)
       - [Effective Set Structure](#effective-set-structure)
-      - [deployment-parameters.yaml](#deployment-parametersyaml)
-      - [technical-configuration-parameters.yaml](#technical-configuration-parametersyaml)
-      - [e2e Parameters](#e2e-parameters)
+      - [Deployment Parameters](#deployment-parameters)
+      - [Runtime Parameters](#runtime-parameters)
+      - [Operational Parameters](#operational-parameters)
       - [mapping.yml](#mappingyml)
     - [Macros](#macros)
     - [Parameters in Effective Set don't Originate from Environment Instance](#parameters-in-effective-set-dont-originate-from-environment-instance)
@@ -22,9 +22,10 @@
 
 1. Calculator CLI must generate [Effective Set](#effective-set)
    1. Calculator CLI must generate Effective Set with deployment parameters (deployment-parameters.yaml)
-   2. Calculator CLI must generate Effective Set with technical parameters (technical-configuration-parameters.yaml)
-   3. Calculator CLI must generate Effective Set with e2e parameters
-   4. Calculator CLI must generate Effective Set with sensitive parameters (credentials.yaml)
+   2. Calculator CLI must generate Effective Set with sensitive deployment parameters (credentials.yaml)
+   3. Calculator CLI must generate Effective Set with operational parameters (operational-parameters.yaml)
+   4. Calculator CLI must generate Effective Set with sensitive operational parameters (operational-credentials.yaml)
+   5. Calculator CLI must generate Effective Set with technical parameters (technical-configuration-parameters.yaml)
 2. Calculator CLI must process [execution attributes](#calculator-cli-execution-attributes)
 3. Calculator CLI must not encrypt or decrypt sensitive parameters (credentials.yaml)
 4. Calculator CLI must resolve [macros](#macros)
@@ -80,8 +81,8 @@ Below is a **complete** list of attributes
             └── effective-set
                 ├── mapping.yml
                 ├── <deployPostfix-01>
-                |   ├── e2e-parameters.yaml
-                |   ├── e2e-credentials.yaml
+                |   ├── operational-parameters.yaml
+                |   ├── operational-credentials.yaml
                 |   ├── <application-name-01>
                 |   |   ├── deployment-parameters.yaml
                 |   |   ├── technical-configuration-parameters.yaml
@@ -91,8 +92,8 @@ Below is a **complete** list of attributes
                 |       ├── technical-configuration-parameters.yaml
                 |       └── credentials.yaml
                 └── <deployPostfix-02>
-                    ├── e2e-parameters.yaml
-                    ├── e2e-credentials.yaml
+                    ├── operational-parameters.yaml
+                    ├── operational-credentials.yaml
                     ├── <application-name-01>
                     |   ├── deployment-parameters.yaml
                     |   ├── technical-configuration-parameters.yaml
@@ -103,9 +104,14 @@ Below is a **complete** list of attributes
                         └── credentials.yaml
 ```
 
-#### deployment-parameters.yaml
+#### Deployment Parameters
 
-This file's parameters define a **distinct** context for rendering Helm manifests.
+This file's parameters define a **distinct** context for rendering Helm manifests. These parameters are applied only during applications (re)deployment.
+
+These parameters are described in two files:
+
+1. **deployment-parameters.yaml**: This file contains non-sensitive deployment parameters.
+2. **credentials.yaml**: This file contains sensitive deployment parameters. If a deployment parameter is described in the Environment Template via an EnvGene credential macro, that parameter will be placed in this file.
 
 Follows this structure:
 
@@ -117,15 +123,27 @@ global: # Optional
   <key>: <value>
 ```
 
-#### technical-configuration-parameters.yaml
+The ``<value>`` can be complex, such as a map or a list, whose elements can also be complex.
+
+#### Runtime Parameters
+
+This file's parameters define a **distinct** context for managing application behavior without redeployment. These parameters can be applied without redeploying the application.
+
+These parameters are described in the file:
+
+1. **technical-configuration-parameters.yaml**: This file contains non-sensitive runtime parameters.
 
 Follows this structure:
 
 ```yaml
-<key>: <value>
+global: # Optional
+  <key>: <value>
+
+<service-name>:
+  <key>: <value>
 ```
 
-#### e2e Parameters
+#### Operational Parameters
 
 These parameters create a **distinct** parameter context used for managing environment lifecycle systems, such as deployment orchestrators or CI procedures.
 
@@ -133,9 +151,8 @@ This context is formed by parameters defined in the ``e2eParameters`` sections o
 
 These parameters are described in two files:
 
-1. **e2e-parameters.yaml**: This file contains non-sensitive e2e parameters.
-
-2. **e2e-credentials.yaml**: This file contains sensitive e2e parameters. If a parameter is described in the Environment Template via an EnvGene credential macro, that parameter will be placed in this file.
+1. **operational-parameters.yaml**: This file contains non-sensitive operational parameters.
+2. **operational-credentials.yaml**: This file contains sensitive operational parameters. If a operational parameter is described in the Environment Template via an EnvGene credential macro, that parameter will be placed in this file.
 
 Both files have the following structure:
 
