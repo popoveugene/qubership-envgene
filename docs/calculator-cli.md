@@ -147,7 +147,7 @@ Both files have the following structure:
 <key>: <value>
 ```
 
-The value can be complex, such as a map or a list, whose elements can also be complex.
+The ``<value>`` can be complex, such as a map or a list, whose elements can also be complex.
 
 #### mapping.yml
 
