@@ -229,7 +229,7 @@ contexts:
   operational:
     consumers:
       - name: <consumer-name>-<schema-version>
-      - name: <json-schema-in-string>
+        schema: <json-schema-in-string>
 ```
 
 **version** - The version of the effective set to be generated. Available options are `v1.0` and `v2.0`. EnvGene uses `--effective-set-version` to pass this attribute to the Calculator CLI. Optional. Default value is `v1.0`.
