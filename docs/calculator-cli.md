@@ -25,7 +25,7 @@
 ## Requirements
 
 1. Calculator CLI must support [Effective Set version 1.0](#effective-set-v10) generation
-2. Calculator CLI must support [Effective Set version 2.0](#effective-set-20) generation
+2. Calculator CLI must support [Effective Set version 2.0](#effective-set-v20) generation
 3. Calculator CLI must process [execution attributes](#calculator-cli-execution-attributes)
 4. Calculator CLI must not encrypt or decrypt sensitive parameters (credentials.yaml)
 5. Calculator CLI must resolve [macros](#macros)
