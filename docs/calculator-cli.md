@@ -11,7 +11,7 @@
         - [\[Version 1.0\] Effective Set Structure](#version-10-effective-set-structure)
         - [\[Version 1.0\] deployment-parameters.yaml](#version-10-deployment-parametersyaml)
         - [\[Version 1.0\] technical-configuration-parameters.yaml](#version-10-technical-configuration-parametersyaml)
-        - [\[Version 1.0\] **mapping**.yml](#version-10-mappingyml)
+        - [\[Version 1.0\] mapping.yml](#version-10-mappingyml)
       - [Version 2.0](#version-20)
         - [\[Version 2.0\] Effective Set Structure](#version-20-effective-set-structure)
         - [\[Version 2.0\] Deployment Parameter Context](#version-20-deployment-parameter-context)
@@ -114,7 +114,7 @@ global: # Optional
 <key>: <value>
 ```
 
-##### [Version 1.0] **mapping**.yml
+##### [Version 1.0] mapping.yml
 
 This file defines a mapping between namespaces and the corresponding paths to their respective folders. The need for this mapping arises from the fact that the effective set consumer requires information about the specific names of namespaces. However, the effective set is stored in the repository in a structure that facilitates comparisons between effective sets for environments of the same type."
 
