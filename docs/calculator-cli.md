@@ -11,7 +11,7 @@
       - [\[Version 1.0\] deployment-parameters.yaml](#version-10-deployment-parametersyaml)
       - [\[Version 1.0\] technical-configuration-parameters.yaml](#version-10-technical-configuration-parametersyaml)
       - [\[Version 1.0\] mapping.yml](#version-10-mappingyml)
-      - [Effective Set 2.0](#effective-set-20)
+    - [Effective Set 2.0](#effective-set-20)
       - [\[Version 2.0\] Effective Set Structure](#version-20-effective-set-structure)
       - [\[Version 2.0\] Deployment Parameter Context](#version-20-deployment-parameter-context)
       - [\[Version 2.0\] Operational Parameter Context](#version-20-operational-parameter-context)
@@ -121,7 +121,7 @@ This file defines a mapping between namespaces and the corresponding paths to th
 <namespace-name-02>: <path-to-deployPostfix-folder-02>
 ```
 
-#### Effective Set 2.0
+### Effective Set 2.0
 
 #### [Version 2.0] Effective Set Structure
 
