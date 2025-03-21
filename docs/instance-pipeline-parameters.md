@@ -221,19 +221,30 @@ If `true`:
 
 ## EFFECTIVE_SET_CONFIG
 
-**Description**: Settings for effective set configuration.
+**Description**: Settings for effective set configuration. *JSON in string**
 
-`version` - The version of the effective set to be generated. Available options are `v1.0` and `v2.0`. EnvGene uses `--effective-set-version` to pass this attribute to the Calculator CLI. Optional. Default value is `v1.0`.
+```yaml
+version: <v1.0|v2.0>
+contexts:
+  operational:
+    consumers:
+      - name: <consumer-name>-<schema-version>
+      - name: <json-schema-in-string>
+```
 
-`contexts.operational.consumers` - For each element in this list, the effective set will contain a consumer-specific operational context component. EnvGene uses `--operational-consumer-specific-schema-path` to pass the path to the JSON schema file to the Calculator CLI. Each element of the list is passed as a separate `--operational-consumer-specific-schema-path` attribute. Optional.
+**version** - The version of the effective set to be generated. Available options are `v1.0` and `v2.0`. EnvGene uses `--effective-set-version` to pass this attribute to the Calculator CLI. Optional. Default value is `v1.0`.
 
-`contexts.operational.consumers.name` - The name of the consumer-specific operational context component registered in EnvGene, in `<consumer-name>-<schema-version>` notation. The schema for this consumer is contained in the EnvGene Docker image. Optional. Mutually exclusive with `contexts.operational.consumers.schema`.
+**contexts.operational.consumers** - For each element in this list, the effective set will contain a consumer-specific operational context component. EnvGene uses `--operational-consumer-specific-schema-path` to pass the path to the JSON schema file to the Calculator CLI. Each element of the list is passed as a separate `--operational-consumer-specific-schema-path` attribute. Optional.
+
+**contexts.operational.consumers.name** - The name of the consumer-specific operational context component registered in EnvGene, in `<consumer-name>-<schema-version>` notation. The schema for this consumer is contained in the EnvGene Docker image. Optional. Mutually exclusive with `contexts.operational.consumers.schema`.
 
 List of consumer-specific operational context components registered in EnvGene:
 
 1. None
 
-`contexts.operational.consumers.schema` - The content of the consumer-specific operational context component JSON schema transformed into a string. EnvGene saves the value as a JSON file and passes the path to it to the Calculator CLI. The schema obtained in this way is not saved between pipeline runs and must be passed for each run. Optional. Mutually exclusive with `contexts.operational.consumers.name`.
+**contexts.operational.consumers.schema** - The content of the consumer-specific operational context component JSON schema transformed into a string. EnvGene saves the value as a JSON file and passes the path to it to the Calculator CLI. The schema obtained in this way is not saved between pipeline runs and must be passed for each run. Optional. Mutually exclusive with `contexts.operational.consumers.name`.
+
+See [details](./calculator-cli.md#effective-set)
 
 **Example**:
 
