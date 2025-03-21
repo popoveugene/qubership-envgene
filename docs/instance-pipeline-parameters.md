@@ -221,7 +221,7 @@ If `true`:
 
 ## EFFECTIVE_SET_CONFIG
 
-**Description**: Settings for effective set configuration. *JSON in string**
+**Description**: Settings for effective set configuration. **JSON in string**
 
 ```yaml
 version: <v1.0|v2.0>
