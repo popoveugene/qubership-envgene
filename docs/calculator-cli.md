@@ -6,18 +6,17 @@
   - [Proposed Approach](#proposed-approach)
     - [Calculator CLI execution attributes](#calculator-cli-execution-attributes)
     - [Registry Configuration](#registry-configuration)
-    - [Effective Set](#effective-set)
-      - [Version 1.0](#version-10)
-        - [\[Version 1.0\] Effective Set Structure](#version-10-effective-set-structure)
-        - [\[Version 1.0\] deployment-parameters.yaml](#version-10-deployment-parametersyaml)
-        - [\[Version 1.0\] technical-configuration-parameters.yaml](#version-10-technical-configuration-parametersyaml)
-        - [\[Version 1.0\] mapping.yml](#version-10-mappingyml)
-      - [Version 2.0](#version-20)
-        - [\[Version 2.0\] Effective Set Structure](#version-20-effective-set-structure)
-        - [\[Version 2.0\] Deployment Parameter Context](#version-20-deployment-parameter-context)
-        - [\[Version 2.0\] Operational Parameter Context](#version-20-operational-parameter-context)
-        - [\[Version 2.0\] Runtime Parameter Context](#version-20-runtime-parameter-context)
-        - [\[Version 2.0\] mapping.yml](#version-20-mappingyml)
+    - [Effective Set v1.0](#effective-set-v10)
+      - [\[Version 1.0\] Effective Set Structure](#version-10-effective-set-structure)
+      - [\[Version 1.0\] deployment-parameters.yaml](#version-10-deployment-parametersyaml)
+      - [\[Version 1.0\] technical-configuration-parameters.yaml](#version-10-technical-configuration-parametersyaml)
+      - [\[Version 1.0\] mapping.yml](#version-10-mappingyml)
+      - [Effective Set 2.0](#effective-set-20)
+      - [\[Version 2.0\] Effective Set Structure](#version-20-effective-set-structure)
+      - [\[Version 2.0\] Deployment Parameter Context](#version-20-deployment-parameter-context)
+      - [\[Version 2.0\] Operational Parameter Context](#version-20-operational-parameter-context)
+      - [\[Version 2.0\] Runtime Parameter Context](#version-20-runtime-parameter-context)
+      - [\[Version 2.0\] mapping.yml](#version-20-mappingyml)
     - [Macros](#macros)
     - [Parameters in Effective Set don't Originate from Environment Instance](#parameters-in-effective-set-dont-originate-from-environment-instance)
   - [Use Cases](#use-cases)
@@ -65,11 +64,9 @@ Below is a **complete** list of attributes
 
 [Registry config example](../schemas/registry.yml)
 
-### Effective Set
+### Effective Set v1.0
 
-#### Version 1.0
-
-##### [Version 1.0] Effective Set Structure
+#### [Version 1.0] Effective Set Structure
 
 ```text
 ...
@@ -98,7 +95,7 @@ Below is a **complete** list of attributes
                         └── credentials.yaml
 ```
 
-##### [Version 1.0] deployment-parameters.yaml
+#### [Version 1.0] deployment-parameters.yaml
 
 ```yaml
 global: # Optional
@@ -108,13 +105,13 @@ global: # Optional
   <key>: <value>
 ```
 
-##### [Version 1.0] technical-configuration-parameters.yaml
+#### [Version 1.0] technical-configuration-parameters.yaml
 
 ```yaml
 <key>: <value>
 ```
 
-##### [Version 1.0] mapping.yml
+#### [Version 1.0] mapping.yml
 
 This file defines a mapping between namespaces and the corresponding paths to their respective folders. The need for this mapping arises from the fact that the effective set consumer requires information about the specific names of namespaces. However, the effective set is stored in the repository in a structure that facilitates comparisons between effective sets for environments of the same type."
 
@@ -124,9 +121,9 @@ This file defines a mapping between namespaces and the corresponding paths to th
 <namespace-name-02>: <path-to-deployPostfix-folder-02>
 ```
 
-#### Version 2.0
+#### Effective Set 2.0
 
-##### [Version 2.0] Effective Set Structure
+#### [Version 2.0] Effective Set Structure
 
 ```text
 ...
@@ -174,7 +171,7 @@ This file defines a mapping between namespaces and the corresponding paths to th
                             └── credentials.yaml                            
 ```
 
-##### [Version 2.0] Deployment Parameter Context
+#### [Version 2.0] Deployment Parameter Context
 
 These parameters define a **distinct** context for rendering Helm manifests. These parameters are applied only during applications (re)deployment.
 
@@ -197,7 +194,7 @@ global: # Optional
 
 The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
 
-##### [Version 2.0] Operational Parameter Context
+#### [Version 2.0] Operational Parameter Context
 
 These parameters create a **distinct** parameter context used for managing environment lifecycle systems, such as deployment orchestrators or CI procedures.
 
@@ -232,7 +229,7 @@ The calculator forms consumer-specific parameters according to the following pri
 
 [Example of Consumer-specific parameters JSON schema](../examples/consumer-v1.0.json)
 
-##### [Version 2.0] Runtime Parameter Context
+#### [Version 2.0] Runtime Parameter Context
 
 This file's parameters define a **distinct** context for managing application behavior without redeployment. These parameters can be applied without redeploying the application.
 
@@ -253,7 +250,7 @@ global: # Optional
   <key>: <value>
 ```
 
-##### [Version 2.0] mapping.yml
+#### [Version 2.0] mapping.yml
 
 This file defines a mapping between namespaces and the corresponding paths to their respective folders. The need for this mapping arises from the fact that the effective set consumer requires information about the specific names of namespaces. However, the effective set is stored in the repository in a structure that facilitates comparisons between effective sets for environments of the same type
 
