@@ -244,7 +244,7 @@ List of consumer-specific operational context components registered in EnvGene:
 
 **contexts.operational.consumers.schema** - The content of the consumer-specific operational context component JSON schema transformed into a string. EnvGene saves the value as a JSON file and passes the path to it to the Calculator CLI. The schema obtained in this way is not saved between pipeline runs and must be passed for each run. Optional. Mutually exclusive with `contexts.operational.consumers.name`.
 
-See [details](./calculator-cli.md#effective-set)
+See [details of Effective set generation](./calculator-cli.md#effective-set)
 
 **Example**:
 
