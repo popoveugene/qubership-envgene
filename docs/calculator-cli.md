@@ -11,7 +11,7 @@
       - [\[Version 1.0\] deployment-parameters.yaml](#version-10-deployment-parametersyaml)
       - [\[Version 1.0\] technical-configuration-parameters.yaml](#version-10-technical-configuration-parametersyaml)
       - [\[Version 1.0\] mapping.yml](#version-10-mappingyml)
-    - [Effective Set 2.0](#effective-set-20)
+    - [Effective Set v2.0](#effective-set-v20)
       - [\[Version 2.0\] Effective Set Structure](#version-20-effective-set-structure)
       - [\[Version 2.0\] Deployment Parameter Context](#version-20-deployment-parameter-context)
       - [\[Version 2.0\] Operational Parameter Context](#version-20-operational-parameter-context)
@@ -24,8 +24,8 @@
 
 ## Requirements
 
-1. Calculator CLI must support [Effective Set version 1.0](#version-10) generation
-2. Calculator CLI must support [Effective Set version 2.0](#version-20) generation
+1. Calculator CLI must support [Effective Set version 1.0](#effective-set-v10) generation
+2. Calculator CLI must support [Effective Set version 2.0](#effective-set-20) generation
 3. Calculator CLI must process [execution attributes](#calculator-cli-execution-attributes)
 4. Calculator CLI must not encrypt or decrypt sensitive parameters (credentials.yaml)
 5. Calculator CLI must resolve [macros](#macros)
@@ -121,7 +121,7 @@ This file defines a mapping between namespaces and the corresponding paths to th
 <namespace-name-02>: <path-to-deployPostfix-folder-02>
 ```
 
-### Effective Set 2.0
+### Effective Set v2.0
 
 #### [Version 2.0] Effective Set Structure
 
