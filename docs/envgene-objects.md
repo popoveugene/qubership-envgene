@@ -39,6 +39,8 @@ namespaces:
   - template_path: "<path-to-the-namespace-template-file>"
 ```
 
+[Template Descriptor JSON schema](/schemas/template-descriptor.schema.json)
+
 Any YAML file located in the `/templates/env_templates/` folder is considered a Template Descriptor.
 
 The name of this file effectively serves as the name of the Environment Template. In the Environment Inventory, this name is used to specify which Environment Template from the artifact should be used.
@@ -114,9 +116,9 @@ TBD
 
 ### Composite Structure
 
-This object describes the composite structure of a solution. It contains information about which namespace hosts the core applications that offer essential tools and services for business microservices(`baseline`), and which namespace contains the applications that consume these services(`satellites`).
+This object describes the composite structure of a solution. It contains information about which namespace hosts the core applications that offer essential tools and services for business microservices (`baseline`), and which namespace contains the applications that consume these services (`satellites`).
 
-[JSON schema](TBD)
+[Composite Structure JSON schema](TBD)
 
 Example:
 
