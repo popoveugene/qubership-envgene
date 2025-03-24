@@ -118,6 +118,8 @@ TBD
 
 This object describes the composite structure of a solution. It contains information about which namespace hosts the core applications that offer essential tools and services for business microservices (`baseline`), and which namespace contains the applications that consume these services (`satellites`).
 
+The Composite Structure is located in the path `/configuration/environments/<CLUSTER-NAME>/<ENV-NAME>/composite-structure.yml`
+
 [Composite Structure JSON schema](TBD)
 
 Example:
