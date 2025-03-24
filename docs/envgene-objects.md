@@ -73,7 +73,6 @@ Example:
 
 ```yaml
 name: "{{ current_env.cloudNameWithCluster }}-composite-structure"
-version: 0
 baseline:
   name: "{{ current_env.environmentName }}-core"
   type: "namespace"
@@ -93,6 +92,19 @@ It is generated during the rendering process of an Environment Template. During 
 The Environment Inventory is mandatory for creating an Environment Instance. It is a configuration file that describes a specific environment, including which Environment Template artifact to use and which environment-specific parameters to apply during rendering. It serves as the "recipe" for creating an Environment Instance.  
 
 The Environment Instance has a human-readable structure and is not directly used by parameter consumers. For parameter consumers, a consumer-specific structure is generated based on the Environment Instance. For example, for ArgoCD, an Effective Set is generated.
+
+EnvGene adds the following header to all auto-generated objects (all Environment Instance objects are auto-generated):
+
+```yaml
+# The contents of this file is generated from template artifact: <environment-template-artifact>.
+# Contents will be overwritten by next generation.
+# Please modify this contents only for development purposes or as workaround.
+```
+
+> [!NOTE]
+> The \<environment-template-artifact> placeholder is automatically replaced with the name of the EnvGene Environment Template artifact used for generation.
+
+EnvGene sorts every Environment Instance object according to its JSON schema. This ensures that when objects are modified (e.g., when applying a new template version), the repository commits remain human-readable.
 
 ### Tenant
 
@@ -116,7 +128,27 @@ TBD
 
 ### Composite Structure
 
-This object describes the composite structure of a solution. It contains information about which namespace hosts the core applications that offer essential tools and services for business microservices (`baseline`), and which namespace contains the applications that consume these services (`satellites`).
+This object describes the composite structure of a solution. It contains information about which namespace hosts the core applications that offer essential tools and services for business microservices (`baseline`), and which namespace contains the applications that consume these services (`satellites`). It has the following structure:
+
+```yaml
+name: <composite-structure-name>
+version: 0
+# Envgene automatically adds `id`` attribute regardless of what is specified in the template
+# Envgene sets this attribute's value to what is specified in `baseline.name`.
+# If the attribute already exists in the template, it will be overwritten.
+id: baseline.name
+# Envgene automatically adds `version`` attribute regardless of what is specified in the template
+# Envgene always sets the value to 0
+# If the attribute already exists in the template, it will be overwritten.
+baseline:
+  name: <baseline-namespace>
+  type: "namespace"
+satellites:
+  - name: <satellite-namespace-1>
+    type: "namespace"
+  - name: <satellite-namespace-2>
+    type: "namespace"
+```
 
 The Composite Structure is located in the path `/configuration/environments/<CLUSTER-NAME>/<ENV-NAME>/composite-structure.yml`
 
@@ -127,6 +159,7 @@ Example:
 ```yaml
 name: "clusterA-env-1-composite-structure"
 version: 0
+id: "env-1-core"
 baseline:
   name: "env-1-core"
   type: "namespace"
