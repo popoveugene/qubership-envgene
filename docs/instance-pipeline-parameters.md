@@ -228,21 +228,26 @@ version: <v1.0|v2.0>
 contexts:
   operational:
     consumers:
-      - name: <consumer-name>-<schema-version>
+      - name: <consumer-component-name>
+        version: <consumer-component-version>
         schema: <json-schema-in-string>
 ```
 
 **version** - The version of the effective set to be generated. Available options are `v1.0` and `v2.0`. EnvGene uses `--effective-set-version` to pass this attribute to the Calculator CLI. Optional. Default value is `v1.0`.
 
-**contexts.operational.consumers** - For each element in this list, the effective set will contain a consumer-specific operational context component. EnvGene uses `--operational-consumer-specific-schema-path` to pass the path to the JSON schema file to the Calculator CLI. Each element of the list is passed as a separate `--operational-consumer-specific-schema-path` attribute. Optional.
+**contexts.operational.consumers** - Each entry in this list adds a consumer-specific operational context component to the Effective Set. EnvGene passes the path to the corresponding JSON schema file to the Calculator CLI using the `--operational-consumer-specific-schema-path argument`. Each list element is passed as a separate argument. Optional.
 
-**contexts.operational.consumers.name** - The name of the consumer-specific operational context component registered in EnvGene, in `<consumer-name>-<schema-version>` notation. The schema for this consumer is contained in the EnvGene Docker image. Optional. Mutually exclusive with `contexts.operational.consumers.schema`.
+**contexts.operational.consumers[].name** - The name of the consumer-specific operational context component. If used without `contexts.operational.consumers[].schema`, the component must be pre-registered in EnvGene. Mandatory
 
-List of consumer-specific operational context components registered in EnvGene:
+**contexts.operational.consumers[].version** - The version of the consumer-specific operational context component. If used without `contexts.operational.consumers[].schema`, the component must be pre-registered in EnvGene. Mandatory
+
+Registered component JSON schemas are stored in the EnvGene Docker image as JSON files named: `<consumers-name>-<consumer-version>.schema.json`
+
+Consumer-specific operational context components registered in EnvGene:
 
 1. None
 
-**contexts.operational.consumers.schema** - The content of the consumer-specific operational context component JSON schema transformed into a string. EnvGene saves the value as a JSON file and passes the path to it to the Calculator CLI. The schema obtained in this way is not saved between pipeline runs and must be passed for each run. Optional. Mutually exclusive with `contexts.operational.consumers.name`.
+**contexts.operational.consumers[].schema** - The content of the consumer-specific operational context component JSON schema transformed into a string. It is used to generate a consumer-specific operational context for a consumer not registered in EnvGene. EnvGene saves the value as a JSON file with the name `<contexts.operational[].name>-<contexts.operational[].version>.schema.json` and passes the path to it to the Calculator CLI via `--operational-consumer-specific-schema-path` attribute. The schema obtained in this way is not saved between pipeline runs and must be passed for each run. Optional.
 
 See details of [Effective Set generation](./calculator-cli.md#effective-set)
 
@@ -253,6 +258,8 @@ version: "v1.0"
 contexts:
   operational:
     consumers:
-      - name: "dcl-v1.0"
-      - name: "csd-v2.1"
+      - name: "dcl"
+        version: "v1.0"
+      - name: "csd"
+        version: "v2.1"
 ```

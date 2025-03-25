@@ -98,7 +98,7 @@ Below is a **complete** list of attributes
 #### [Version 1.0] deployment-parameters.yaml
 
 ```yaml
-global: # Optional
+global:
   <key>: <value>
 
 <service-name>:
@@ -185,7 +185,7 @@ For each namespace/deploy postfix, the context contains two files:
 The structure of each of these files is as follows:
 
 ```yaml
-global: # Optional
+global:
   <key>: <value>
 
 <service-name>:
@@ -207,8 +207,10 @@ These **general** parameters are described in two files:
 
 Optionally, the operational context can include file pairs containing **consumer-specific** sensitive/non-sensitive parameters. These parameters, derived as subsets of `parameters.yaml` and `credentials.yaml`, are generated based on a JSON schema provided by the `--operational-context-schema-path` attribute. Each attribute results in a separate file pair:
 
-- **\<consumer-name\>-parameters.yaml**: This file contains consumer-specific non-sensitive parameters.
-- **\<consumer-name\>-credentials.yaml**: This file contains consumer-specific sensitive parameters. If a consumer-specific parameter is described in the Environment Template via an EnvGene credential macro, that parameter will be placed in this file.
+- **\<consumer\>-parameters.yaml**: This file contains consumer-specific non-sensitive parameters.
+- **\<consumer\>-credentials.yaml**: This file contains consumer-specific sensitive parameters. If a consumer-specific parameter is described in the Environment Template via an EnvGene credential macro, that parameter will be placed in this file.
+
+The `consumer` value is extracted from the filename (with `.schema.json` removed) of the JSON schema provided via the `--operational-context-schema-path` argument.
 
 The structure of each of these files is as follows:
 
@@ -237,8 +239,8 @@ This context is formed as a result of merging parameters defined in the `technic
 
 For each namespace/deploy postfix, the context contains two files:
 
-- **parameters.yaml**: This file contains non-sensitive parameters.
-- **credentials.yaml**: This file contains sensitive parameters. If a parameter is described in the Environment Template via EnvGene credential macro, that parameter will be placed in this file.
+- **parameters.yaml**: This file contains runtime non-sensitive parameters.
+- **credentials.yaml**: This file contains runtime sensitive parameters. If a parameter is described in the Environment Template via EnvGene credential macro, that parameter will be placed in this file.
 
 The structure of each of these files is as follows:
 
