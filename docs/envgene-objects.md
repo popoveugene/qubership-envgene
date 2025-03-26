@@ -139,7 +139,7 @@ version: 0
 # Envgene automatically adds `id`` attribute regardless of what is specified in the template
 # Envgene sets this attribute's value to what is specified in `baseline.name`
 # If the attribute already exists in the template, it will be overwritten
-id: baseline.name
+id: <baseline.name>
 baseline:
   name: <baseline-namespace>
   type: "namespace"
