@@ -2,33 +2,33 @@
 # Instance Pipeline Parameters
 
 - [Instance Pipeline Parameters](#instance-pipeline-parameters)
-  - [ENV\_NAMES](#env_names)
-  - [ENV\_BUILDER](#env_builder)
-  - [GET\_PASSPORT](#get_passport)
-  - [CMDB\_IMPORT](#cmdb_import)
-  - [DEPLOYMENT\_TICKET\_ID](#deployment_ticket_id)
-  - [ENV\_TEMPLATE\_VERSION](#env_template_version)
-  - [SD\_SOURCE\_TYPE](#sd_source_type)
-  - [SD\_VERSION](#sd_version)
-  - [SD\_DATA](#sd_data)
-  - [SD\_DELTA](#sd_delta)
-  - [ENV\_INVENTORY\_INIT](#env_inventory_init)
-  - [ENV\_TEMPLATE\_NAME](#env_template_name)
-  - [ENV\_SPECIFIC\_PARAMS](#env_specific_params)
-  - [GENERATE\_EFFECTIVE\_SET](#generate_effective_set)
-  - [EFFECTIVE\_SET\_CONFIG](#effective_set_config)
+  - [`ENV_NAMES`](#env_names)
+  - [`ENV_BUILDER`](#env_builder)
+  - [`GET_PASSPORT`](#get_passport)
+  - [`CMDB_IMPORT`](#cmdb_import)
+  - [`DEPLOYMENT_TICKET_ID`](#deployment_ticket_id)
+  - [`ENV_TEMPLATE_VERSION`](#env_template_version)
+  - [`SD_SOURCE_TYPE`](#sd_source_type)
+  - [`SD_VERSION`](#sd_version)
+  - [`SD_DATA`](#sd_data)
+  - [`SD_DELTA`](#sd_delta)
+  - [`ENV_INVENTORY_INIT`](#env_inventory_init)
+  - [`ENV_TEMPLATE_NAME`](#env_template_name)
+  - [`ENV_SPECIFIC_PARAMS`](#env_specific_params)
+  - [`GENERATE_EFFECTIVE_SET`](#generate_effective_set)
+  - [`EFFECTIVE_SET_CONFIG`](#effective_set_config)
 
 The following are the launch parameters for the instance repository pipeline. These parameters influence, the execution of specific jobs within the pipeline.
 
 All parameters are of the string data type
 
-## ENV_NAMES
+## `ENV_NAMES`
 
 **Description**: Environment or Environments for for which processing will be launched. In `<cluster-name>/<env-name>` notation.
 
 **Example**:  "ocp-01/platform"
 
-## ENV_BUILDER
+## `ENV_BUILDER`
 
 **Description**: Feature flag. Valid values ​​are `true` or `false`.
 
@@ -37,7 +37,7 @@ In the pipeline, Environment Instance generation job is executed. Environment In
 
 **Example**: `true`  
 
-## GET_PASSPORT
+## `GET_PASSPORT`
 
 **Description**: Feature flag. Valid values ​​are `true` or `false`.
 
@@ -46,7 +46,7 @@ If `true`:
 
 **Example**: `true`  
 
-## CMDB_IMPORT
+## `CMDB_IMPORT`
 
 **Description**: Feature flag. Valid values ​​are `true` or `false`.
 
@@ -55,19 +55,19 @@ If `true`:
 
 **Example**: `true`
 
-## DEPLOYMENT_TICKET_ID
+## `DEPLOYMENT_TICKET_ID`
 
 **Description**: Used as commit message prefix for commit into Instance repository.
 
 **Example**: "TICKET-ID-12345"
 
-## ENV_TEMPLATE_VERSION
+## `ENV_TEMPLATE_VERSION`
 
 **Description**: If provided system update Environment Template version in the Environment Inventory. System overrides `envTemplate.templateArtifact.artifact.version` OR `envTemplate.artifact` at `/environments/<ENV_NAME>/Inventory/env_definition.yml`
 
 **Example**: "env-template:v1.2.3"
 
-## SD_SOURCE_TYPE
+## `SD_SOURCE_TYPE`
 
 **Description**: Defines the method by which SD is passed in the `SD_DATA` or `SD_VERSION` attributes. Valid values ​​are `artifact` OR `json`.
 
@@ -79,7 +79,7 @@ If `json`:
 
 **Example**: `artifact`
 
-## SD_VERSION
+## `SD_VERSION`
 
 **Description**: Defines the SD artifact in `application:version` notation
 
@@ -87,9 +87,9 @@ System downloads the artifact and overrides the file `/environments/<ENV_NAME>/I
 
 **Example**: "dft:release-2024-1-2.02.002-RELEASE"
 
-## SD_DATA
+## `SD_DATA`
 
-**Description**: Defines the SD.
+**Description**: Defines the content of SD. **JSON in string** format.
 
 System overrides the file `/environments/<ENV_NAME>/Inventory/solution-descriptor/sd.yml` with the content provided in `SD_DATA`. If the file is absent, it will be generated.
 
@@ -124,22 +124,20 @@ userData:
 
 ```
 
-## SD_DELTA
+## `SD_DELTA`
 
 **Description**: Defines if SD provided in `SD_DATA` is Delta SD. Valid values ​​are `true` or `false`.
 
-If `true`:
-
+If `true`:  
   System overrides the file `/environments/<ENV_NAME>/Inventory/solution-descriptor/delta_sd.yml` with the content provided in `SD_DATA`. If the file is absent, it will be generated.
   System merges the content provided in `SD_DATA` into the file `/environments/<ENV_NAME>/Inventory/solution-descriptor/sd.yml`.
 
-If `false` or not provided:
-
+If `false` or not provided:  
   System overrides the file `/environments/<ENV_NAME>/Inventory/solution-descriptor/sd.yml` with the content provided in `SD_DATA`. If the file is absent, it will be generated.
 
 **Example**: `true`
 
-## ENV_INVENTORY_INIT
+## `ENV_INVENTORY_INIT`
 
 **Description**:
 
@@ -148,7 +146,7 @@ If `true`:
 
 **Example**: `true`
 
-## ENV_TEMPLATE_NAME
+## `ENV_TEMPLATE_NAME`
 
 **Description**: Specifies the template artifact value within the generated Environment Inventory. This is used together with `ENV_INVENTORY_INIT`.
 
@@ -163,9 +161,9 @@ envTemplate:
 
 **Example**: "env-template:v1.2.3"
 
-## ENV_SPECIFIC_PARAMS
+## `ENV_SPECIFIC_PARAMS`
 
-**Description**: Specifies Environment Inventory and env-specific parameters. This is used together with `ENV_INVENTORY_INIT`. **JSON in string format**.
+**Description**: Specifies Environment Inventory and env-specific parameters. This is used together with `ENV_INVENTORY_INIT`. **JSON in string** format.
 
 **Example**:
 
@@ -210,7 +208,7 @@ credentials:
 
 ```
 
-## GENERATE_EFFECTIVE_SET
+## `GENERATE_EFFECTIVE_SET`
 
 **Description**: Feature flag. Valid values ​​are `true` or `false`.
 
@@ -219,12 +217,13 @@ If `true`:
 
 **Example**: `true`
 
-## EFFECTIVE_SET_CONFIG
+## `EFFECTIVE_SET_CONFIG`
 
-**Description**: Settings for effective set configuration. **JSON in string**
+**Description**: Settings for effective set configuration. This is used together with `GENERATE_EFFECTIVE_SET`. **JSON in string** format.
 
 ```yaml
 version: <v1.0|v2.0>
+effective_set_expiry: <effective-set-expiry-time>
 contexts:
   operational:
     consumers:
@@ -233,33 +232,17 @@ contexts:
         schema: <json-schema-in-string>
 ```
 
-**version** - The version of the effective set to be generated. Available options are `v1.0` and `v2.0`. EnvGene uses `--effective-set-version` to pass this attribute to the Calculator CLI. Optional. Default value is `v1.0`.
-
-**contexts.operational.consumers** - Each entry in this list adds a consumer-specific operational context component to the Effective Set. EnvGene passes the path to the corresponding JSON schema file to the Calculator CLI using the `--operational-consumer-specific-schema-path argument`. Each list element is passed as a separate argument. Optional.
-
-**contexts.operational.consumers[].name** - The name of the consumer-specific operational context component. If used without `contexts.operational.consumers[].schema`, the component must be pre-registered in EnvGene. Mandatory
-
-**contexts.operational.consumers[].version** - The version of the consumer-specific operational context component. If used without `contexts.operational.consumers[].schema`, the component must be pre-registered in EnvGene. Mandatory
+| Attribute | Mandatory | Description | Default | Example |
+|---|---|---|---|---|
+| **version** | Optional | The version of the effective set to be generated. Available options are `v1.0` and `v2.0`. EnvGene uses `--effective-set-version` to pass this attribute to the Calculator CLI. | `v1.0` | `v2.0` |
+| **effective_set_expiry** | Optional | The duration for which the effective set (stored as a job artifact) will remain available for download. Envgene passes this value unchanged to: 1) The `retention-days` job attribute in case of GitHub pipeline. 2) The `expire_in` job attribute in case of GitLab pipeline. The exact syntax and constraints differ between platforms. Refer to the GitHub and GitLab documentation for details. | GitLab: `1 hours`, GitHub: `1` (day) | GitLab: `2 hours`, GitHub: `2` |
+| **contexts.operational.consumers** | Optional | Each entry in this list adds a [consumer-specific operational context component](/docs/calculator-cli.md#version-20-operational-parameter-context) to the Effective Set. EnvGene passes the path to the corresponding JSON schema file to the Calculator CLI using the `--operational-consumer-specific-schema-path argument`. Each list element is passed as a separate argument. | None | None |
+| **contexts.operational.consumers[].name** | Mandatory | The name of the [consumer-specific operational context component](/docs/calculator-cli.md#version-20-operational-parameter-context). If used without `contexts.operational.consumers[].schema`, the component must be pre-registered in EnvGene | None | `dcl` |
+| **contexts.operational.consumers[].version** | Mandatory | The version of the [consumer-specific operational context component](/docs/calculator-cli.md#version-20-operational-parameter-context). If used without `contexts.operational.consumers[].schema`, the component must be pre-registered in EnvGene. | None | `v1.0`|
+| **contexts.operational.consumers[].schema** | Optional | The content of the consumer-specific operational context component JSON schema transformed into a string. It is used to generate a consumer-specific operational context for a consumer not registered in EnvGene. EnvGene saves the value as a JSON file with the name `<contexts.operational[].name>-<contexts.operational[].version>.schema.json` and passes the path to it to the Calculator CLI via `--operational-consumer-specific-schema-path` attribute. The schema obtained in this way is not saved between pipeline runs and must be passed for each run. | None | [consumer-v1.0.json](/examples/consumer-v1.0.json) |
 
 Registered component JSON schemas are stored in the EnvGene Docker image as JSON files named: `<consumers-name>-<consumer-version>.schema.json`
 
 Consumer-specific operational context components registered in EnvGene:
 
 1. None
-
-**contexts.operational.consumers[].schema** - The content of the consumer-specific operational context component JSON schema transformed into a string. It is used to generate a consumer-specific operational context for a consumer not registered in EnvGene. EnvGene saves the value as a JSON file with the name `<contexts.operational[].name>-<contexts.operational[].version>.schema.json` and passes the path to it to the Calculator CLI via `--operational-consumer-specific-schema-path` attribute. The schema obtained in this way is not saved between pipeline runs and must be passed for each run. Optional.
-
-See details of [Effective Set generation](./calculator-cli.md#effective-set)
-
-**Example**:
-
-```yaml
-version: "v1.0"
-contexts:
-  operational:
-    consumers:
-      - name: "dcl"
-        version: "v1.0"
-      - name: "csd"
-        version: "v2.1"
-```

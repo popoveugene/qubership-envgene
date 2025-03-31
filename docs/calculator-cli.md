@@ -227,9 +227,9 @@ The calculator forms consumer-specific parameters according to the following pri
    1. If a default value is set for this parameter, it will be added to the consumer-specific parameters
    2. If no default value is set for this parameter and the parameter is not mandatory, the parameter will not be added
    3. If no default value is set for this parameter and the parameter is mandatory, the generation process will terminate with an error
-3. These rules apply only to root-level parameters; default and mandatory handling of complex values is not supported
+3. These rules apply only to root-level parameters
 
-[Example of Consumer-specific parameters JSON schema](../examples/consumer-v1.0.json)
+[Example of consumer-specific operational context component JSON schema](../examples/consumer-v1.0.json)
 
 #### [Version 2.0] Runtime Parameter Context
 
