@@ -15,10 +15,12 @@
       - [\[Version 2.0\] Effective Set Structure](#version-20-effective-set-structure)
       - [\[Version 2.0\] Deployment Parameter Context](#version-20-deployment-parameter-context)
       - [\[Version 2.0\] Operational Parameter Context](#version-20-operational-parameter-context)
+        - [Operational Parameter Context Injected Parameters](#operational-parameter-context-injected-parameters)
+          - [`composite_structure` Example](#composite_structure-example)
+          - [`k8s_tokens` Example](#k8s_tokens-example)
       - [\[Version 2.0\] Runtime Parameter Context](#version-20-runtime-parameter-context)
       - [\[Version 2.0\] mapping.yml](#version-20-mappingyml)
     - [Macros](#macros)
-    - [Parameters in Effective Set don't Originate from Environment Instance](#parameters-in-effective-set-dont-originate-from-environment-instance)
   - [Use Cases](#use-cases)
     - [Effective Set Calculation](#effective-set-calculation)
 
@@ -173,7 +175,7 @@ This file defines a mapping between namespaces and the corresponding paths to th
 
 #### [Version 2.0] Deployment Parameter Context
 
-These parameters define a **distinct** context for rendering Helm manifests. These parameters are applied only during applications (re)deployment.
+These parameters establish a dedicated rendering context exclusively applied during application (re)deployment operations for Helm manifest rendering.
 
 This context is formed as a result of merging parameters defined in the `deployParameters` sections of the `Tenant`, `Cloud`, `Namespace`, `Application` Environment Instance objects. Parameters from the Application SBOM and `Resource Profile` objects of the Environment Instance also contribute to the formation of this context.
 
@@ -196,9 +198,42 @@ The `<value>` can be complex, such as a map or a list, whose elements can also b
 
 #### [Version 2.0] Operational Parameter Context
 
-These parameters create a **distinct** parameter context used for managing environment lifecycle systems, such as deployment orchestrators or CI procedures.
+These parameters define a dedicated parameter context used for managing environment lifecycle systems, such as deployment orchestrators or CI/CD workflows.
 
-This context is formed by parameters defined in the `e2eParameters` sections of the `Cloud` Environment Instance object.
+This context is constructed from parameters defined in the `e2eParameters` sections of the `Cloud` Environment Instance object. Additionally, the following parameters are included:
+
+##### Operational Parameter Context Injected Parameters
+
+| Attribute | Mandatory | Description | Default | Example |
+|---|---|---|---|---|
+| **composite_structure** | Mandatory | Contains the unmodified  [Composite Structure](https://github.com/Netcracker/qubership-envgene/blob/main/docs/envgene-objects.md#environment-instance-objects) object of the Environment Instance for which the Effective Set is generated. This variable is located in `parameters.yaml` | `{}`| [example](#composite_structure-example) |
+| **k8s_tokens** | Mandatory | Contains deployment tokens for each namespace in the Environment Instance. The value is derived from the `data.secret` property of the Credential specified via `defaultCredentialsId` attribute in the corresponding `Namespace` or parent `Cloud`. If the attribute is not defined at the `Namespace` level, it is inherited from the parent `Cloud`. If defined at both levels, the `Namespace` value takes precedence. Either the `Cloud` or `Namespace` must define `defaultCredentialsId`. This variable is located in `credentials.yaml`.  | None | [example](#k8s_tokens-example) |
+
+###### `composite_structure` Example
+
+```yaml
+composite_structure:
+  name: "clusterA-env-1-composite-structure"
+  version: 0
+  id: "env-1-core"
+  baseline:
+    name: "env-1-core"
+    type: "namespace"
+  satellites:
+    - name: "env-1-bss"
+      type: "namespace"
+    - name: "env-1-oss"
+      type: "namespace"
+```
+
+###### `k8s_tokens` Example
+
+```yaml
+k8s_tokens:
+  env-1-core: "ZXlKaGJHY2lPaUpTVXpJMU5pS..."
+  env-1-bss: "ZXlKaGJHY2lPaUpTVXpJMU5pS..."
+  env-1-oss: "URBd01EQXdNREF3TURBd01EQX..."
+```
 
 These **general** parameters are described in two files:
 
@@ -266,9 +301,6 @@ This file defines a mapping between namespaces and the corresponding paths to th
 
 TBD
 
-### Parameters in Effective Set don't Originate from Environment Instance
-
-TBD
 
 ## Use Cases
 
