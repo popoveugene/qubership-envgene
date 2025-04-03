@@ -14,12 +14,12 @@
     - [Effective Set v2.0](#effective-set-v20)
       - [\[Version 2.0\] Effective Set Structure](#version-20-effective-set-structure)
       - [\[Version 2.0\] Deployment Parameter Context](#version-20-deployment-parameter-context)
+        - [\[Version 2.0\] mapping.yml](#version-20-mappingyml)
       - [\[Version 2.0\] Operational Parameter Context](#version-20-operational-parameter-context)
         - [Operational Parameter Context Injected Parameters](#operational-parameter-context-injected-parameters)
           - [`composite_structure` Example](#composite_structure-example)
           - [`k8s_tokens` Example](#k8s_tokens-example)
       - [\[Version 2.0\] Runtime Parameter Context](#version-20-runtime-parameter-context)
-      - [\[Version 2.0\] mapping.yml](#version-20-mappingyml)
     - [Macros](#macros)
   - [Use Cases](#use-cases)
     - [Effective Set Calculation](#effective-set-calculation)
@@ -133,7 +133,6 @@ This file defines a mapping between namespaces and the corresponding paths to th
     └── <cluster-name-01>
         └── <environment-name-01>
             └── effective-set
-                ├── mapping.yml
                 ├── operational
                 |   ├── parameters.yaml
                 |   ├── credentials.yaml
@@ -142,6 +141,7 @@ This file defines a mapping between namespaces and the corresponding paths to th
                 |   ├── <consumer-name-01>-parameters.yaml
                 |   └── <consumer-name-02>-credentials.yaml
                 ├── deployment
+                |   ├── mapping.yml
                 |   ├── <deployPostfix-01>
                 |   |   ├── <application-name-01>
                 |   |   |   ├── parameters.yaml
@@ -195,6 +195,16 @@ global:
 ```
 
 The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
+
+##### [Version 2.0] mapping.yml
+
+This file defines a mapping between namespaces and the corresponding paths to their respective folders. The need for this mapping arises from the fact that the effective set consumer requires information about the specific names of namespaces. However, the effective set is stored in the repository in a structure that facilitates comparisons between effective sets for environments of the same type
+
+```yaml
+---
+<namespace-name-01>: <path-to-deployPostfix-folder-01> # <namespace-name> should be get from 'name' attribute of namespace object
+<namespace-name-02>: <path-to-deployPostfix-folder-02>
+```
 
 #### [Version 2.0] Operational Parameter Context
 
@@ -287,20 +297,9 @@ global: # Optional
   <key>: <value>
 ```
 
-#### [Version 2.0] mapping.yml
-
-This file defines a mapping between namespaces and the corresponding paths to their respective folders. The need for this mapping arises from the fact that the effective set consumer requires information about the specific names of namespaces. However, the effective set is stored in the repository in a structure that facilitates comparisons between effective sets for environments of the same type
-
-```yaml
----
-<namespace-name-01>: <path-to-deployPostfix-folder-01> # <namespace-name> should be get from 'name' attribute of namespace object
-<namespace-name-02>: <path-to-deployPostfix-folder-02>
-```
-
 ### Macros
 
 TBD
-
 
 ## Use Cases
 
