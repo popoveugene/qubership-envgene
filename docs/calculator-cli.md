@@ -18,7 +18,6 @@
         - [\[Version 2.0\]\[Deployment Parameter Context\] `credentials.yaml`](#version-20deployment-parameter-context-credentialsyaml)
         - [\[Version 2.0\]\[Deployment Parameter Context\] `technical-configuration-parameters.yaml`](#version-20deployment-parameter-context-technical-configuration-parametersyaml)
         - [\[Version 2.0\]\[Deployment Parameter Context\] `deploy-descriptor.yaml`](#version-20deployment-parameter-context-deploy-descriptoryaml)
-        - [\[Version 2.0\]\[Deployment Parameter Context\] `mapping.yml`](#version-20deployment-parameter-context-mappingyml)
       - [\[Version 2.0\] Operational Parameter Context](#version-20-operational-parameter-context)
         - [\[Version 2.0\] Operational Parameter Context Injected Parameters](#version-20-operational-parameter-context-injected-parameters)
           - [\[Version 2.0\]\[Operational Parameter Context\] `composite_structure` Example](#version-20operational-parameter-context-composite_structure-example)
@@ -30,7 +29,6 @@
       - [\[Version 2.0\] Runtime Parameter Context](#version-20-runtime-parameter-context)
         - [\[Version 2.0\]\[Runtime Parameter Context\] `parameters.yaml`](#version-20runtime-parameter-context-parametersyaml)
         - [\[Version 2.0\]\[Runtime Parameter Context\] `credentials.yaml`](#version-20runtime-parameter-context-credentialsyaml)
-        - [\[Version 2.0\]\[Runtime Parameter Context\] `mapping.yml`](#version-20runtime-parameter-context-mappingyml)
     - [Macros](#macros)
   - [Use Cases](#use-cases)
     - [Effective Set Calculation](#effective-set-calculation)
@@ -152,8 +150,7 @@ This file defines a mapping between namespaces and the corresponding paths to th
                 |   ├── <consumer-name-01>-parameters.yaml
                 |   └── <consumer-name-02>-credentials.yaml
                 ├── deployment
-                |   ├── mapping.yml
-                |   ├── <deployPostfix-01>
+                |   ├── <namespace-01>
                 |   |   ├── <application-name-01>
                 |   |   |   ├── deployment-parameters.yaml
                 |   |   |   ├── credentials.yaml
@@ -164,7 +161,7 @@ This file defines a mapping between namespaces and the corresponding paths to th
                 |   |       ├── credentials.yaml
                 |   |       ├── technical-configuration-parameters.yaml
                 |   |       └── deploy-descriptor.yaml
-                |   └── <deployPostfix-02>
+                |   └── <namespace-02>
                 |       ├── <application-name-01>
                 |       |   ├── deployment-parameters.yaml
                 |       |   ├── credentials.yaml
@@ -176,15 +173,14 @@ This file defines a mapping between namespaces and the corresponding paths to th
                 |           ├── technical-configuration-parameters.yaml
                 |           └── deploy-descriptor.yaml
                 └── runtime
-                    ├── mapping.yml
-                    ├── <deployPostfix-01>
+                    ├── <namespace-01>
                     |   ├── <application-name-01>
                     |   |   ├── parameters.yaml
                     |   |   └── credentials.yaml
                     |   └── <application-name-02>
                     |       ├── parameters.yaml
                     |       └── credentials.yaml
-                    └── <deployPostfix-02>
+                    └── <namespace-02>
                         ├── <application-name-01>
                         |   ├── parameters.yaml
                         |   └── credentials.yaml
@@ -206,7 +202,7 @@ This context is formed as a result of merging parameters defined in the `deployP
 > 2. The `deploy-descriptor.yaml` file is currently empty but will be populated with parameters later.
 >
 
-For each namespace/deploy postfix, the context contains files:
+For each namespace, the context contains files:
 
 ##### \[Version 2.0][Deployment Parameter Context] `deployment-parameters.yaml`
 
@@ -256,7 +252,7 @@ Matches the content and structure of the `parameters.yaml` file from the [runtim
 
 Currently empty (reserved for future use)
 
-##### \[Version 2.0][Deployment Parameter Context] `mapping.yml`
+<!-- ##### \[Version 2.0][Deployment Parameter Context] `mapping.yml`
 
 This file defines a mapping between namespaces and the corresponding paths to their respective folders. The need for this mapping arises from the fact that the effective set consumer requires information about the specific names of namespaces. However, the effective set is stored in the repository in a structure that facilitates comparisons between effective sets for environments of the same type
 
@@ -264,7 +260,7 @@ This file defines a mapping between namespaces and the corresponding paths to th
 ---
 <namespace-name-01>: <path-to-deployPostfix-folder-01> # <namespace-name> should be get from 'name' attribute of namespace object
 <namespace-name-02>: <path-to-deployPostfix-folder-02>
-```
+``` -->
 
 #### [Version 2.0] Operational Parameter Context
 
@@ -377,7 +373,7 @@ This file's parameters define a **distinct** context for managing application be
 
 This context is formed as a result of merging parameters defined in the `technicalConfigurationParameters` sections of the `Tenant`, `Cloud`, `Namespace`, `Application` Environment Instance objects.
 
-For each namespace/deploy postfix, the context contains two files:
+For each namespace, the context contains two files:
 
 ##### \[Version 2.0][Runtime Parameter Context] `parameters.yaml`
 
@@ -403,9 +399,9 @@ The structure of this file is as follows:
 
 The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
 
-##### \[Version 2.0][Runtime Parameter Context] `mapping.yml`
+<!-- ##### \[Version 2.0][Runtime Parameter Context] `mapping.yml`
 
-The contents of this file are identical to [mapping.yml in the Deployment Parameter Context](#version-20deployment-parameter-context-mappingyml)
+The contents of this file are identical to [mapping.yml in the Deployment Parameter Context](#version-20deployment-parameter-context-mappingyml) -->
 
 ### Macros
 
