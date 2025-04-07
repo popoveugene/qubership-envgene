@@ -152,26 +152,30 @@ This file defines a mapping between namespaces and the corresponding paths to th
                 ├── deployment
                 |   ├── <namespace-01>
                 |   |   ├── <application-name-01>
-                |   |   |   ├── deployment-parameters.yaml
-                |   |   |   ├── credentials.yaml
-                |   |   |   ├── technical-configuration-parameters.yaml
-                |   |   |   └── deploy-descriptor.yaml
+                |   |   |   └── values
+                |   |   |       ├── deployment-parameters.yaml
+                |   |   |       ├── credentials.yaml
+                |   |   |       ├── technical-configuration-parameters.yaml
+                |   |   |       └── deploy-descriptor.yaml
                 |   |   └── <application-name-02>
-                |   |       ├── deployment-parameters.yaml
-                |   |       ├── credentials.yaml
-                |   |       ├── technical-configuration-parameters.yaml
-                |   |       └── deploy-descriptor.yaml
+                |   |       └── values
+                |   |           ├── deployment-parameters.yaml
+                |   |           ├── credentials.yaml
+                |   |           ├── technical-configuration-parameters.yaml
+                |   |           └── deploy-descriptor.yaml
                 |   └── <namespace-02>
                 |       ├── <application-name-01>
-                |       |   ├── deployment-parameters.yaml
-                |       |   ├── credentials.yaml
-                |       |   ├── technical-configuration-parameters.yaml
-                |       |   └── deploy-descriptor.yaml
+                |       |   └── values
+                |       |       ├── deployment-parameters.yaml
+                |       |       ├── credentials.yaml
+                |       |       ├── technical-configuration-parameters.yaml
+                |       |       └── deploy-descriptor.yaml
                 |       └── <application-name-02>
-                |           ├── deployment-parameters.yaml
-                |           ├── credentials.yaml
-                |           ├── technical-configuration-parameters.yaml
-                |           └── deploy-descriptor.yaml
+                |           └── values
+                |               ├── deployment-parameters.yaml
+                |               ├── credentials.yaml
+                |               ├── technical-configuration-parameters.yaml
+                |               └── deploy-descriptor.yaml
                 └── runtime
                     ├── <namespace-01>
                     |   ├── <application-name-01>
