@@ -109,12 +109,19 @@ Below is a **complete** list of attributes
 #### [Version 1.0] deployment-parameters.yaml
 
 ```yaml
-global:
-  <key>: <value>
-
-<service-name>:
-  <key>: <value>
+<key-1>: <value-1>
+<key-2>: <value-2>
+<service-name-1>: &id001
+  <key-1>: <value-1>
+  <key-2>: <value-2>
+<service-name-2>: *id001
 ```
+
+Each application microservice has its own dedicated section. These sections contain the same set of parameters as defined at the root level.
+
+To avoid repetition, YAML anchors (&) are used for reusability, while aliases (*) reference them.
+
+The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
 
 #### [Version 1.0] technical-configuration-parameters.yaml
 
