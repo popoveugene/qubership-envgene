@@ -230,7 +230,7 @@ The `<value>` can be complex, such as a map or a list, whose elements can also b
 
 ##### \[Version 2.0][Deployment Parameter Context] `credentials.yaml`
 
-This file contains sensitive parameters defined in the `deployParameters` section. If the parameter is described in the Environment Template via EnvGene credential macro, that parameter will be placed in this file  
+This file contains sensitive parameters defined in the `deployParameters` section. If the parameter is described in the Environment Template via EnvGene credential macro, that parameter will be placed in this file.  
 The structure of this file is as follows:
 
 ```yaml
@@ -381,22 +381,24 @@ For each namespace/deploy postfix, the context contains two files:
 
 ##### \[Version 2.0][Runtime Parameter Context] `parameters.yaml`
 
-This file contains runtime non-sensitive parameters defined in the `e2eParameters` section.
+This file contains runtime non-sensitive parameters defined in the `technicalConfigurationParameters` section.
 The structure of this file is as follows:
 
 ```yaml
-<key>: <value>
+<key-1>: <value-1>
+<key-2>: <value-2>
 ```
 
 The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
 
 ##### \[Version 2.0][Runtime Parameter Context] `credentials.yaml`
 
-This file contains sensitive parameters defined in the `e2eParameters` section. If the parameter is described in the Environment Template via EnvGene credential macro, that parameter will be placed in this file  
+This file contains sensitive parameters defined in the `technicalConfigurationParameters` section. If the parameter is described in the Environment Template via EnvGene credential macro, that parameter will be placed in this file  
 The structure of this file is as follows:
 
 ```yaml
-<key>: <value>
+<key-1>: <value-1>
+<key-2>: <value-2>
 ```
 
 The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
@@ -404,7 +406,6 @@ The `<value>` can be complex, such as a map or a list, whose elements can also b
 ##### \[Version 2.0][Runtime Parameter Context] `mapping.yml`
 
 The contents of this file are identical to [mapping.yml in the Deployment Parameter Context](#version-20deployment-parameter-context-mappingyml)
-
 
 ### Macros
 
