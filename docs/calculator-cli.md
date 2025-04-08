@@ -111,10 +111,17 @@ Below is a **complete** list of attributes
 ```yaml
 <key-1>: <value-1>
 <key-2>: <value-2>
-<service-name-1>: &id001
+global: &id001
   <key-1>: <value-1>
   <key-2>: <value-2>
-<service-name-2>: *id001
+<service-name-1>:
+  <<: *id001
+  <service-key-1>: <value-1>
+  <service-key-2>: <value-2>
+<service-name-2>:
+  <<: *id001
+  <service-key-1>: <value-1>
+  <service-key-2>: <value-2>
 ```
 
 Each application microservice has its own dedicated section. These sections contain the same set of parameters as defined at the root level.
@@ -223,10 +230,17 @@ The structure of this file is as follows:
 ```yaml
 <key-1>: <value-1>
 <key-2>: <value-2>
-<service-name-1>: &id001
+global: &id001
   <key-1>: <value-1>
   <key-2>: <value-2>
-<service-name-2>: *id001
+<service-name-1>:
+  <<: *id001
+  <service-key-1>: <value-1>
+  <service-key-2>: <value-2>
+<service-name-2>:
+  <<: *id001
+  <service-key-1>: <value-1>
+  <service-key-2>: <value-2>
 ```
 
 Each application microservice has its own dedicated section. These sections contain the same set of parameters as defined at the root level.
@@ -243,10 +257,17 @@ The structure of this file is as follows:
 ```yaml
 <key-1>: <value-1>
 <key-2>: <value-2>
-<service-name-1>: &id001
+global: &id001
   <key-1>: <value-1>
   <key-2>: <value-2>
-<service-name-2>: *id001
+<service-name-1>:
+  <<: *id001
+  <service-key-1>: <value-1>
+  <service-key-2>: <value-2>
+<service-name-2>:
+  <<: *id001
+  <service-key-1>: <value-1>
+  <service-key-2>: <value-2>
 ```
 
 Each application microservice has its own dedicated section. These sections contain the same set of parameters as defined at the root level.
