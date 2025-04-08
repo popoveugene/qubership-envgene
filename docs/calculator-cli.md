@@ -9,6 +9,7 @@
     - [Effective Set v1.0](#effective-set-v10)
       - [\[Version 1.0\] Effective Set Structure](#version-10-effective-set-structure)
       - [\[Version 1.0\] deployment-parameters.yaml](#version-10-deployment-parametersyaml)
+      - [\[Version 1.0\] credentials.yaml](#version-10-credentialsyaml)
       - [\[Version 1.0\] technical-configuration-parameters.yaml](#version-10-technical-configuration-parametersyaml)
       - [\[Version 1.0\] mapping.yml](#version-10-mappingyml)
     - [Effective Set v2.0](#effective-set-v20)
@@ -129,6 +130,24 @@ Each application microservice has its own dedicated section. These sections cont
 To avoid repetition, YAML anchors (&) are used for reusability, while aliases (*) reference them.
 
 The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
+
+#### [Version 1.0] credentials.yaml
+
+```yaml
+<key-1>: <value-1>
+<key-2>: <value-2>
+global: &id001
+  <key-1>: <value-1>
+  <key-2>: <value-2>
+<service-name-1>:
+  <<: *id001
+<service-name-2>:
+  <<: *id001
+```
+
+Each application microservice has its own dedicated section. These sections contain the same set of parameters as defined at the root level.
+
+To avoid repetition, YAML anchors (&) are used for reusability, while aliases (*) reference them.
 
 #### [Version 1.0] technical-configuration-parameters.yaml
 
@@ -262,12 +281,8 @@ global: &id001
   <key-2>: <value-2>
 <service-name-1>:
   <<: *id001
-  <service-key-1>: <value-1>
-  <service-key-2>: <value-2>
 <service-name-2>:
   <<: *id001
-  <service-key-1>: <value-1>
-  <service-key-2>: <value-2>
 ```
 
 Each application microservice has its own dedicated section. These sections contain the same set of parameters as defined at the root level.
