@@ -19,17 +19,19 @@
         - [\[Version 2.0\]\[Deployment Parameter Context\] `credentials.yaml`](#version-20deployment-parameter-context-credentialsyaml)
         - [\[Version 2.0\]\[Deployment Parameter Context\] `technical-configuration-parameters.yaml`](#version-20deployment-parameter-context-technical-configuration-parametersyaml)
         - [\[Version 2.0\]\[Deployment Parameter Context\] `deploy-descriptor.yaml`](#version-20deployment-parameter-context-deploy-descriptoryaml)
-      - [\[Version 2.0\] Operational Parameter Context](#version-20-operational-parameter-context)
-        - [\[Version 2.0\] Operational Parameter Context Injected Parameters](#version-20-operational-parameter-context-injected-parameters)
-          - [\[Version 2.0\]\[Operational Parameter Context\] `composite_structure` Example](#version-20operational-parameter-context-composite_structure-example)
-          - [\[Version 2.0\]\[Operational Parameter Context\] `k8s_tokens` Example](#version-20operational-parameter-context-k8s_tokens-example)
-        - [\[Version 2.0\]\[Operational Parameter Context\] `parameters.yaml`](#version-20operational-parameter-context-parametersyaml)
-        - [\[Version 2.0\]\[Operational Parameter Context\] `credentials.yaml`](#version-20operational-parameter-context-credentialsyaml)
-        - [\[Version 2.0\]\[Operational Parameter Context\] `<consumer>-parameters.yaml`](#version-20operational-parameter-context-consumer-parametersyaml)
-        - [\[Version 2.0\]\[Operational Parameter Context\] `<consumer>-credentials.yaml`](#version-20operational-parameter-context-consumer-credentialsyaml)
+        - [\[Version 2.0\]\[Deployment Parameter Context\] `mapping.yml`](#version-20deployment-parameter-context-mappingyml)
+      - [\[Version 2.0\] Pipeline Parameter Context](#version-20-pipeline-parameter-context)
+        - [\[Version 2.0\] Pipeline Parameter Context Injected Parameters](#version-20-pipeline-parameter-context-injected-parameters)
+          - [\[Version 2.0\]\[Pipeline Parameter Context\] `composite_structure` Example](#version-20pipeline-parameter-context-composite_structure-example)
+          - [\[Version 2.0\]\[Pipeline Parameter Context\] `k8s_tokens` Example](#version-20pipeline-parameter-context-k8s_tokens-example)
+        - [\[Version 2.0\]\[Pipeline Parameter Context\] `parameters.yaml`](#version-20pipeline-parameter-context-parametersyaml)
+        - [\[Version 2.0\]\[Pipeline Parameter Context\] `credentials.yaml`](#version-20pipeline-parameter-context-credentialsyaml)
+        - [\[Version 2.0\]\[Pipeline Parameter Context\] `<consumer>-parameters.yaml`](#version-20pipeline-parameter-context-consumer-parametersyaml)
+        - [\[Version 2.0\]\[Pipeline Parameter Context\] `<consumer>-credentials.yaml`](#version-20pipeline-parameter-context-consumer-credentialsyaml)
       - [\[Version 2.0\] Runtime Parameter Context](#version-20-runtime-parameter-context)
         - [\[Version 2.0\]\[Runtime Parameter Context\] `parameters.yaml`](#version-20runtime-parameter-context-parametersyaml)
         - [\[Version 2.0\]\[Runtime Parameter Context\] `credentials.yaml`](#version-20runtime-parameter-context-credentialsyaml)
+        - [\[Version 2.0\]\[Runtime Parameter Context\] `mapping.yml`](#version-20runtime-parameter-context-mappingyml)
     - [Macros](#macros)
   - [Use Cases](#use-cases)
     - [Effective Set Calculation](#effective-set-calculation)
@@ -68,7 +70,7 @@ Below is a **complete** list of attributes
 | `--registries`/`-r`| string | yes | Path to the [registry configuration](#registry-configuration) | N/A | `/configuration/registry.yml` |
 | `--output`/`-o` | string | yes | Folder where the result will be put by Calculator CLI | N/A | `"/environments/cluster/platform-00/effective-set"` |
 | `--effective-set-version`/`-esv` | string | no | The version of the effective set to be generated. Available options are `v1.0` and `v2.0` | `v1.0` | `v1.0` |
-| `--operational-consumer-specific-schema-path`/`-ocssp` | string | no | Path to a JSON schema defining a consumer-specific operational context component. Multiple attributes of this type can be provided  | N/A |  |
+| `--pipeline-consumer-specific-schema-path`/`-pcssp` | string | no | Path to a JSON schema defining a consumer-specific pipeline context component. Multiple attributes of this type can be provided  | N/A |  |
 
 ### Registry Configuration
 
@@ -168,7 +170,7 @@ This file defines a mapping between namespaces and the corresponding paths to th
     └── <cluster-name-01>
         └── <environment-name-01>
             └── effective-set
-                ├── operational
+                ├── pipeline
                 |   ├── parameters.yaml
                 |   ├── credentials.yaml
                 |   ├── <consumer-name-01>-parameters.yaml
@@ -176,41 +178,39 @@ This file defines a mapping between namespaces and the corresponding paths to th
                 |   ├── <consumer-name-01>-parameters.yaml
                 |   └── <consumer-name-02>-credentials.yaml
                 ├── deployment
-                |   ├── <namespace-01>
+                |   ├── mapping.yml
+                |   ├── <deployPostfix-01>
                 |   |   ├── <application-name-01>
                 |   |   |   └── values
                 |   |   |       ├── deployment-parameters.yaml
                 |   |   |       ├── credentials.yaml
-                |   |   |       ├── technical-configuration-parameters.yaml
                 |   |   |       └── deploy-descriptor.yaml
                 |   |   └── <application-name-02>
                 |   |       └── values
                 |   |           ├── deployment-parameters.yaml
                 |   |           ├── credentials.yaml
-                |   |           ├── technical-configuration-parameters.yaml
                 |   |           └── deploy-descriptor.yaml
-                |   └── <namespace-02>
+                |   └── <deployPostfix-02>
                 |       ├── <application-name-01>
                 |       |   └── values
                 |       |       ├── deployment-parameters.yaml
                 |       |       ├── credentials.yaml
-                |       |       ├── technical-configuration-parameters.yaml
                 |       |       └── deploy-descriptor.yaml
                 |       └── <application-name-02>
                 |           └── values
                 |               ├── deployment-parameters.yaml
                 |               ├── credentials.yaml
-                |               ├── technical-configuration-parameters.yaml
                 |               └── deploy-descriptor.yaml
                 └── runtime
-                    ├── <namespace-01>
+                    ├── mapping.yml
+                    ├── <deployPostfix-01>
                     |   ├── <application-name-01>
                     |   |   ├── parameters.yaml
                     |   |   └── credentials.yaml
                     |   └── <application-name-02>
                     |       ├── parameters.yaml
                     |       └── credentials.yaml
-                    └── <namespace-02>
+                    └── <deployPostfix-02>
                         ├── <application-name-01>
                         |   ├── parameters.yaml
                         |   └── credentials.yaml
@@ -228,11 +228,9 @@ This context is formed as a result of merging parameters defined in the `deployP
 > [!NOTE]
 > Transition Period Notes:
 >
-> 1. This context currently includes parameters from the runtime context — specifically, the `technical-configuration-parameters.yaml` file. This is temporary and will be removed in a future update.
-> 2. The `deploy-descriptor.yaml` file is currently empty but will be populated with parameters later.
->
+> 1. The `deploy-descriptor.yaml` file is currently empty but will be populated with parameters later.
 
-For each namespace, the context contains files:
+For each namespace/deploy postfix, the context contains files:
 
 ##### \[Version 2.0][Deployment Parameter Context] `deployment-parameters.yaml`
 
@@ -285,7 +283,7 @@ Matches the content and structure of the `parameters.yaml` file from the [runtim
 
 Currently empty (reserved for future use)
 
-<!-- ##### \[Version 2.0][Deployment Parameter Context] `mapping.yml`
+##### \[Version 2.0][Deployment Parameter Context] `mapping.yml`
 
 This file defines a mapping between namespaces and the corresponding paths to their respective folders. The need for this mapping arises from the fact that the effective set consumer requires information about the specific names of namespaces. However, the effective set is stored in the repository in a structure that facilitates comparisons between effective sets for environments of the same type
 
@@ -293,22 +291,22 @@ This file defines a mapping between namespaces and the corresponding paths to th
 ---
 <namespace-name-01>: <path-to-deployPostfix-folder-01> # <namespace-name> should be get from 'name' attribute of namespace object
 <namespace-name-02>: <path-to-deployPostfix-folder-02>
-``` -->
+```
 
-#### [Version 2.0] Operational Parameter Context
+#### [Version 2.0] Pipeline Parameter Context
 
 These parameters define a dedicated parameter context used for managing environment lifecycle systems, such as deployment orchestrators or CI/CD workflows.
 
 This context is constructed from parameters defined in the `e2eParameters` sections of the `Cloud` Environment Instance object. Additionally, the following parameters are included:
 
-##### [Version 2.0] Operational Parameter Context Injected Parameters
+##### [Version 2.0] Pipeline Parameter Context Injected Parameters
 
 | Attribute | Mandatory | Description | Default | Example |
 |---|---|---|---|---|
-| **composite_structure** | Mandatory | Contains the unmodified  [Composite Structure](https://github.com/Netcracker/qubership-envgene/blob/main/docs/envgene-objects.md#environment-instance-objects) object of the Environment Instance for which the Effective Set is generated. This variable is located in `parameters.yaml` | `{}`| [example](#version-20operational-parameter-context-composite_structure-example) |
-| **k8s_tokens** | Mandatory | Contains deployment tokens for each namespace in the Environment Instance. The value is derived from the `data.secret` property of the Credential specified via `defaultCredentialsId` attribute in the corresponding `Namespace` or parent `Cloud`. If the attribute is not defined at the `Namespace` level, it is inherited from the parent `Cloud`. If defined at both levels, the `Namespace` value takes precedence. Either the `Cloud` or `Namespace` must define `defaultCredentialsId`. This variable is located in `credentials.yaml`.  | None | [example](#version-20operational-parameter-context-k8s_tokens-example) |
+| **composite_structure** | Mandatory | Contains the unmodified  [Composite Structure](https://github.com/Netcracker/qubership-envgene/blob/main/docs/envgene-objects.md#environment-instance-objects) object of the Environment Instance for which the Effective Set is generated. This variable is located in `parameters.yaml` | `{}`| [example](#version-20pipeline-parameter-context-composite_structure-example) |
+| **k8s_tokens** | Mandatory | Contains deployment tokens for each namespace in the Environment Instance. The value is derived from the `data.secret` property of the Credential specified via `defaultCredentialsId` attribute in the corresponding `Namespace` or parent `Cloud`. If the attribute is not defined at the `Namespace` level, it is inherited from the parent `Cloud`. If defined at both levels, the `Namespace` value takes precedence. Either the `Cloud` or `Namespace` must define `defaultCredentialsId`. This variable is located in `credentials.yaml`.  | None | [example](#version-20pipeline-parameter-context-k8s_tokens-example) |
 
-###### \[Version 2.0][Operational Parameter Context] `composite_structure` Example
+###### \[Version 2.0][Pipeline Parameter Context] `composite_structure` Example
 
 ```yaml
 composite_structure:
@@ -325,7 +323,7 @@ composite_structure:
       type: "namespace"
 ```
 
-###### \[Version 2.0][Operational Parameter Context] `k8s_tokens` Example
+###### \[Version 2.0][Pipeline Parameter Context] `k8s_tokens` Example
 
 ```yaml
 k8s_tokens:
@@ -336,7 +334,7 @@ k8s_tokens:
 
 These **general** parameters are described in two files:
 
-##### \[Version 2.0][Operational Parameter Context] `parameters.yaml`
+##### \[Version 2.0][Pipeline Parameter Context] `parameters.yaml`
 
 This file contains non-sensitive parameters defined in the `e2eParameters` section.  
 The structure of this file is as follows:
@@ -348,7 +346,7 @@ The structure of this file is as follows:
 
 The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
 
-##### \[Version 2.0][Operational Parameter Context] `credentials.yaml`
+##### \[Version 2.0][Pipeline Parameter Context] `credentials.yaml`
 
 This file contains sensitive parameters defined in the `e2eParameters` section. If the parameter is described in the Environment Template via EnvGene credential macro, that parameter will be placed in this file.  
 The structure of this file is as follows:
@@ -360,9 +358,9 @@ The structure of this file is as follows:
 
 The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
 
-Optionally, the operational context can include file pairs containing **consumer-specific** sensitive/non-sensitive parameters. These parameters, derived as subsets of `parameters.yaml` and `credentials.yaml`, are generated based on a JSON schema provided by the `--operational-context-schema-path` attribute. Each attribute results in a separate file pair:
+Optionally, the pipeline context can include file pairs containing **consumer-specific** sensitive/non-sensitive parameters. These parameters, derived as subsets of `parameters.yaml` and `credentials.yaml`, are generated based on a JSON schema provided by the `--pipeline-context-schema-path` attribute. Each attribute results in a separate file pair:
 
-##### \[Version 2.0][Operational Parameter Context] `<consumer>-parameters.yaml`
+##### \[Version 2.0][Pipeline Parameter Context] `<consumer>-parameters.yaml`
 
 This file contains consumer-specific non-sensitive parameters.
 The structure of this file is as follows:
@@ -374,11 +372,11 @@ The structure of this file is as follows:
 
 The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
 
-##### \[Version 2.0][Operational Parameter Context] `<consumer>-credentials.yaml`
+##### \[Version 2.0][Pipeline Parameter Context] `<consumer>-credentials.yaml`
 
 This file contains consumer-specific sensitive parameters. If a consumer-specific parameter is described in the Environment Template via an EnvGene credential macro, that parameter will be placed in this file.
 
-The `consumer` value is extracted from the filename (with `.schema.json` removed) of the JSON schema provided via the `--operational-context-schema-path` argument.
+The `consumer` value is extracted from the filename (with `.schema.json` removed) of the JSON schema provided via the `--pipeline-context-schema-path` argument.
 
 The structure of this file is as follows:
 
@@ -398,7 +396,7 @@ The calculator forms consumer-specific parameters according to the following pri
    3. If no default value is set for this parameter and the parameter is mandatory, the generation process will terminate with an error
 3. These rules apply only to root-level parameters
 
-[Example of consumer-specific operational context component JSON schema](../examples/consumer-v1.0.json)
+[Example of consumer-specific pipeline context component JSON schema](../examples/consumer-v1.0.json)
 
 #### [Version 2.0] Runtime Parameter Context
 
@@ -406,7 +404,7 @@ This file's parameters define a **distinct** context for managing application be
 
 This context is formed as a result of merging parameters defined in the `technicalConfigurationParameters` sections of the `Tenant`, `Cloud`, `Namespace`, `Application` Environment Instance objects.
 
-For each namespace, the context contains two files:
+For each namespace/deploy postfix, the context contains two files:
 
 ##### \[Version 2.0][Runtime Parameter Context] `parameters.yaml`
 
@@ -432,9 +430,9 @@ The structure of this file is as follows:
 
 The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
 
-<!-- ##### \[Version 2.0][Runtime Parameter Context] `mapping.yml`
+##### \[Version 2.0][Runtime Parameter Context] `mapping.yml`
 
-The contents of this file are identical to [mapping.yml in the Deployment Parameter Context](#version-20deployment-parameter-context-mappingyml) -->
+The contents of this file are identical to [mapping.yml in the Deployment Parameter Context](#version-20deployment-parameter-context-mappingyml)
 
 ### Macros
 
