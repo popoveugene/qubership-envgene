@@ -12,7 +12,7 @@
   set_fact:
     template_override: "{{ namespace.template_override| default('') }}"
 
-- name: Generate Envs Namespace yaml {{ _namespace_template_name }} for {{ namespace.name }} 
+- name: Generate Envs Namespace yaml {{ _namespace_template_name }} for {{ namespace.name }}
   ansible.builtin.blockinfile:
     path: "{{ _current_env_dir }}/Namespaces/{{ _namespace_template_name }}/namespace.yml"
     block: "{{ lookup('template', namespace.template_path) }}"

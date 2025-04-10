@@ -15,6 +15,7 @@
         template_version: "{{ lookup('ansible.builtin.env', 'template_version') }}"
         cloud_passport_file_path: "{{ lookup('ansible.builtin.env', 'cloud_passport_file_path') }}"
         cmdb_url: "{{ lookup('ansible.builtin.env', 'cmdb_url') }}"
+        output_dir: "{{ lookup('ansible.builtin.env', 'output_dir') }}"
         render_parameters_dir: "{{ lookup('ansible.builtin.env', 'render_parameters_dir') }}"
     - name: Print arguments
       debug:
@@ -95,7 +96,17 @@
         _current_env_dir: "{{ current_env_dir }}"
         _template: "{{ current_env_template.cloud }}"
 
-    - name: Gen namespaces 
+    - name: Generate solution_structure variable
+      ansible.builtin.include_role:
+        name: generate_solution_structure
+      vars:
+        env_template_name: "{{ current_env.env_template }}"
+        env_template_path: "{{ current_env_template.namespaces }}"
+        sd_output_dir: "{{ output_dir }}"
+        sd_cluster_name: "{{ cluster_name }}"
+        sd_env: "{{ env }}"
+
+    - name: Gen namespaces
       ansible.builtin.include_role:
         name: generate_namespaces
       vars:
@@ -120,6 +131,17 @@
         loop_var: profile
       when: current_env_template.resourceProfiles is defined
 
+    - name: Gen composite structure
+      ansible.builtin.include_role:
+        name: generate_composite_structure
+      vars:
+        _env: "{{ env }}"
+        _tenant: "{{ tenant }}"
+        _cloud: "{{ current_env.cloud }}"
+        _current_env_dir: "{{ current_env_dir }}"
+        _template: "{{current_env_template.composite_structure}}"
+      when: current_env_template.composite_structure is defined
+        
     - name: Generate environment specific schema
       ansible.builtin.copy:
         src: "{{ current_env_template.envSpecificSchema }}"
