@@ -17,8 +17,8 @@
       - [\[Version 2.0\] Deployment Parameter Context](#version-20-deployment-parameter-context)
         - [\[Version 2.0\]\[Deployment Parameter Context\] `deployment-parameters.yaml`](#version-20deployment-parameter-context-deployment-parametersyaml)
         - [\[Version 2.0\]\[Deployment Parameter Context\] `credentials.yaml`](#version-20deployment-parameter-context-credentialsyaml)
-        - [\[Version 2.0\]\[Deployment Parameter Context\] `technical-configuration-parameters.yaml`](#version-20deployment-parameter-context-technical-configuration-parametersyaml)
         - [\[Version 2.0\]\[Deployment Parameter Context\] `deploy-descriptor.yaml`](#version-20deployment-parameter-context-deploy-descriptoryaml)
+          - [](#)
         - [\[Version 2.0\]\[Deployment Parameter Context\] `mapping.yml`](#version-20deployment-parameter-context-mappingyml)
       - [\[Version 2.0\] Pipeline Parameter Context](#version-20-pipeline-parameter-context)
         - [\[Version 2.0\] Pipeline Parameter Context Injected Parameters](#version-20-pipeline-parameter-context-injected-parameters)
@@ -275,13 +275,30 @@ To avoid repetition, YAML anchors (&) are used for reusability, while aliases (*
 
 The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
 
-##### \[Version 2.0][Deployment Parameter Context] `technical-configuration-parameters.yaml`
-
-Matches the content and structure of the `parameters.yaml` file from the [runtime](#version-20-runtime-parameter-context) context
-
 ##### \[Version 2.0][Deployment Parameter Context] `deploy-descriptor.yaml`
 
-Currently empty (reserved for future use)
+This file describes the parameters of the application artifacts generated during the build process. These parameters are extracted from the application's SBOM (Software Bill of Materials) file. The file contains a predefined set of parameters, and users cannot modify it.
+The structure of this file is as follows:
+
+```yaml
+APPLICATION_NAME: <>
+DEPLOYMENT_SESSION_ID: <>
+deployDescriptor: &id001
+  <service-name-1>:
+    contracted_key: value
+  <service-name-2>:
+    contracted_key: value
+global: &id002
+  deployDescriptor: *id001
+<service-name-2>: &id003
+  APPLICATION_NAME: <>
+  DEPLOYMENT_SESSION_ID: <>
+  deployDescriptor: *id001
+  global: *id002
+<service-name-2>: *id003
+```
+
+###### 
 
 ##### \[Version 2.0][Deployment Parameter Context] `mapping.yml`
 
