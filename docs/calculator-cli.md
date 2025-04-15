@@ -332,14 +332,14 @@ global: &id002
 
 ###### Predefined `deploy-descriptor.yaml` parameters
 
-####### Common
+Common:
 
 | Attribute | Mandatory | Type | Description | Default | Source in Application SBOM |
 |---|---|---|---|---|---|
 | `APPLICATION_NAME` | yes | string | Name of the application | None | `.metadata.component.name` |
 | `DEPLOYMENT_SESSION_ID` | yes | string | `''`  | None | Taken from input parameter  `DEPLOYMENT_SESSION_ID` passed via `extra_params` (not from SBOM) |
 
-####### Per service
+Per service:
 
 | Attribute | Mandatory | Type | Description | Default | Source in Application SBOM |
 |---|---|---|---|---|---|
