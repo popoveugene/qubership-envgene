@@ -280,46 +280,15 @@ This file describes the parameters of the application artifacts generated during
 The structure of this file is as follows:
 
 ```yaml
-APPLICATION_NAME: <<string>>
-DEPLOYMENT_SESSION_ID: <<string>>
+<common-predefined-key-1>: <common-predefined-value-1>:
+<common-predefined-key-2>: <common-predefined-value-2>:
 deployDescriptor: &id001
   <service-name-1>:
-    artifact:
-      artifactId: business-calendar-widgets
-      groupId: com.netcracker.cloud
-      version: release-2025.1-20250303.151539-build3
-    artifacts:
-      - artifact_id:
-        artifact_path:
-        artifact_type:
-        classifier:
-        deploy_params:
-        gav:
-        group_id:
-        id:
-        name:
-        repository:
-        type:
-        url:
-        version:
-    deploy_param:
-    docker_digest:
-    docker_registry:
-    docker_repository_name:
-    docker_tag:
-    full_image_name:
-    git_branch:
-    git_revision:
-    git_url:
-    image:
-    image_name:
-    image_type:
-    name:
-    promote_artifacts:
-    qualifier:
-    version:
+    <service-predefined-key-1>: <service-predefined-value-1>:
+    <service-predefined-key-2>: <service-predefined-value-2>:
   <service-name-2>:
-    contracted_key: value
+    <service-predefined-key-1>: <service-predefined-value-1>:
+    <service-predefined-key-2>: <service-predefined-value-2>:
 global: &id002
   deployDescriptor: *id001
 <service-name-1>: &id003
