@@ -18,7 +18,7 @@
         - [\[Version 2.0\]\[Deployment Parameter Context\] `deployment-parameters.yaml`](#version-20deployment-parameter-context-deployment-parametersyaml)
         - [\[Version 2.0\]\[Deployment Parameter Context\] `credentials.yaml`](#version-20deployment-parameter-context-credentialsyaml)
         - [\[Version 2.0\]\[Deployment Parameter Context\] `deploy-descriptor.yaml`](#version-20deployment-parameter-context-deploy-descriptoryaml)
-          - [](#)
+          - [Predefined `deploy-descriptor.yaml` parameters](#predefined-deploy-descriptoryaml-parameters)
         - [\[Version 2.0\]\[Deployment Parameter Context\] `mapping.yml`](#version-20deployment-parameter-context-mappingyml)
       - [\[Version 2.0\] Pipeline Parameter Context](#version-20-pipeline-parameter-context)
         - [\[Version 2.0\] Pipeline Parameter Context Injected Parameters](#version-20-pipeline-parameter-context-injected-parameters)
@@ -63,14 +63,15 @@ Below is a **complete** list of attributes
 
 | Attribute | Type | Mandatory | Description | Default | Example |
 |---|---|---|---|---|--|
-| `--env-id`/`-e` | string | yes | Environment id in `<cluster-name>/<environment-name>` notation | N/A | `"cluster/platform-00"` |
+| `--env-id`/`-e` | string | yes | Environment id in `<cluster-name>/<environment-name>` notation | N/A | `cluster/platform-00` |
 | `--envs-path`/`-ep` | string | yes | Path to `/environments` folder | N/A |  `/environments` |
 | `--sboms-path`/`-sp`| string | yes | Path to the folder with Application and Environment Template SBOMs. In Solution SBOM, the path to Application SBOM and Environment Template SBOM is specified relative to this folder. | N/A |`/sboms` |
 | `--solution-sbom-path`/`-ssp`| string | yes | Path to the Solution SBOM. | N/A | `/environments/cluster/platform-00/Inventory/solution-descriptor/solution.sbom.json` |
 | `--registries`/`-r`| string | yes | Path to the [registry configuration](#registry-configuration) | N/A | `/configuration/registry.yml` |
-| `--output`/`-o` | string | yes | Folder where the result will be put by Calculator CLI | N/A | `"/environments/cluster/platform-00/effective-set"` |
+| `--output`/`-o` | string | yes | Folder where the result will be put by Calculator CLI | N/A | `/environments/cluster/platform-00/effective-set` |
 | `--effective-set-version`/`-esv` | string | no | The version of the effective set to be generated. Available options are `v1.0` and `v2.0` | `v1.0` | `v1.0` |
 | `--pipeline-consumer-specific-schema-path`/`-pcssp` | string | no | Path to a JSON schema defining a consumer-specific pipeline context component. Multiple attributes of this type can be provided  | N/A |  |
+| `--extra_params`/`-e` | string | no | Additional parameters used by the Calculator for effective set generation. Multiple instances of this attribute can be provided | N/A | `DEPLOYMENT_SESSION_ID=550e8400-e29b-41d4-a716-446655440000` |
 
 ### Registry Configuration
 
@@ -269,28 +270,59 @@ The structure of this file is as follows:
 <key-2>: <value-2>
 ```
 
-Each application microservice has its own dedicated section. These sections contain the same set of parameters as defined at the root level.
-
-To avoid repetition, YAML anchors (&) are used for reusability, while aliases (*) reference them.
-
-The `<value>` can be complex, such as a map or a list, whose elements can also be complex.
-
 ##### \[Version 2.0][Deployment Parameter Context] `deploy-descriptor.yaml`
 
-This file describes the parameters of the application artifacts generated during the build process. These parameters are extracted from the application's SBOM (Software Bill of Materials) file. The file contains a predefined set of parameters, and users cannot modify it.
+This file describes the parameters of the application artifacts generated during the build process. These parameters are extracted from the Application's SBOM. The file contains a **predefined** set of parameters, and users cannot modify it.
+
+>[!Note]
+> The `DEPLOYMENT_SESSION_ID` parameter is an exception to this rule - it is taken from `extra_params`
+
 The structure of this file is as follows:
 
 ```yaml
-APPLICATION_NAME: <>
-DEPLOYMENT_SESSION_ID: <>
+APPLICATION_NAME: <<string>>
+DEPLOYMENT_SESSION_ID: <<string>>
 deployDescriptor: &id001
   <service-name-1>:
-    contracted_key: value
+    artifact:
+      artifactId: business-calendar-widgets
+      groupId: com.netcracker.cloud
+      version: release-2025.1-20250303.151539-build3
+    artifacts:
+      - artifact_id:
+        artifact_path:
+        artifact_type:
+        classifier:
+        deploy_params:
+        gav:
+        group_id:
+        id:
+        name:
+        repository:
+        type:
+        url:
+        version:
+    deploy_param:
+    docker_digest:
+    docker_registry:
+    docker_repository_name:
+    docker_tag:
+    full_image_name:
+    git_branch:
+    git_revision:
+    git_url:
+    image:
+    image_name:
+    image_type:
+    name:
+    promote_artifacts:
+    qualifier:
+    version:
   <service-name-2>:
     contracted_key: value
 global: &id002
   deployDescriptor: *id001
-<service-name-2>: &id003
+<service-name-1>: &id003
   APPLICATION_NAME: <>
   DEPLOYMENT_SESSION_ID: <>
   deployDescriptor: *id001
@@ -298,7 +330,53 @@ global: &id002
 <service-name-2>: *id003
 ```
 
-###### 
+###### Predefined `deploy-descriptor.yaml` parameters
+
+####### Common
+
+| Attribute | Mandatory | Type | Description | Default | Source in Application SBOM |
+|---|---|---|---|---|---|
+| `APPLICATION_NAME` | yes | string | Name of the application | None | `.metadata.component.name` |
+| `DEPLOYMENT_SESSION_ID` | yes | string | `''`  | None | Taken from input parameter  `DEPLOYMENT_SESSION_ID` passed via `extra_params` (not from SBOM) |
+
+####### Per service
+
+| Attribute | Mandatory | Type | Description | Default | Source in Application SBOM |
+|---|---|---|---|---|---|
+| `artifact` | no | string |   | None |   |
+| `artifact.artifactId` | no | string |   | None |   |
+| `artifact.groupId` | no | string |  | None |   |
+| `artifact.version` | no | string |   | None |   |
+| `artifacts` | yes | list |   | `[]` |   |
+| `artifacts[].artifact_id` | yes | string |   | `''` |   |
+| `artifacts[].artifact_path` | yes | string |  | `''` |   |
+| `artifacts[].artifact_type` | yes | string |   | `''` |   |
+| `artifacts[].classifier` | yes | string |   | `''` |   |
+| `artifacts[].deploy_params` | yes | string |   | `''` |   |
+| `artifacts[].gav` | yes | string |   | `''` |   |
+| `artifacts[].group_id` | yes | string |   | `''` |   |
+| `artifacts[].id` | yes | string |   | `''` |   |
+| `artifacts[].name` | yes | string |   | `''` |   |
+| `artifacts[].repository` | yes | string |   | `''` |   |
+| `artifacts[].type` | yes | string |   | `''` |   |
+| `artifacts[].url` | yes | string |   | `''` |   |
+| `artifacts[].version` | yes | string |   | `''` |   |
+| `deploy_param` | yes | string | always `''` | `''` | None |
+| `docker_digest` | yes | string | Хэш сумма докер имаджа сервиса полученная с помощью `SHA-256` алгоритма | None | `.components[?name=<service-name>][?mime-type=application/vnd.docker.image].hashes[0].content` |
+| `docker_registry` | FUUUUUUCK |  |  |  |  |
+| `docker_repository_name` | yes | string | Репозиторий в реджестри где расположен докер имадж | None | `.components[?name=<service-name>].docker_repository_name` |
+| `docker_tag` | yes | string | Версия докер имаджа сервиса | None | `.components[?name=<service-name>].version` |
+| `full_image_name` | FUUUUUUCK docker_registry+docker_repository_name+name+version |  |  |  |  |
+| `git_branch` | yes | string | Имя ветки репозитория в котором проходил билд сеервиса | None | `.components[?name=<service-name>].version.properties[?name=git_branch].value` |
+| `git_revision` | yes | string | Хэш сумма коммита который привел к билдк сервиса | None | `.components[?name=<service-name>].version.properties[?name=git_revision].value` |
+| `git_url` | FUUUUUUCK |  |  |  |  |
+| `image` | FUUUUUUCK docker_registry+docker_repository_name+name+version |  |  |  |  |
+| `image_name` | yes | string | Имя докер имаджа сервиса | None | `.components[?name=<service-name>].name` |
+| `image_type` | yes | string | TBD | None | `.components[?name=<service-name>].version.properties[?name=image_type].value` |
+| `name` | yes | string | Имя сервиса | None | `<service-name>` |
+| `promote_artifacts` | ???? |  |  |  |  |
+| `qualifier` | ???? | bool |  |  |  |
+| `version` | yes | string | Версия сервиса | None | `.components[?name=<service-name>].version` |
 
 ##### \[Version 2.0][Deployment Parameter Context] `mapping.yml`
 

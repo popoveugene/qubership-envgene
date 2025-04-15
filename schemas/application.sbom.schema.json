@@ -169,6 +169,51 @@
         }
       }
     },
+    "hash": {
+      "type": "object",
+      "title": "Hash",
+      "required": [
+        "alg",
+        "content"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "alg": {
+          "$ref": "#/definitions/hash-alg"
+        },
+        "content": {
+          "$ref": "#/definitions/hash-content"
+        }
+      }
+    },
+    "hash-alg": {
+      "type": "string",
+      "title": "Hash Algorithm",
+      "description": "The algorithm that generated the hash value.",
+      "enum": [
+        "MD5",
+        "SHA-1",
+        "SHA-256",
+        "SHA-384",
+        "SHA-512",
+        "SHA3-256",
+        "SHA3-384",
+        "SHA3-512",
+        "BLAKE2b-256",
+        "BLAKE2b-384",
+        "BLAKE2b-512",
+        "BLAKE3"
+      ]
+    },
+    "hash-content": {
+      "type": "string",
+      "title": "Hash Value",
+      "description": "The value of the hash.",
+      "examples": [
+        "3942447fac867ae5cdb3229b658f4d48"
+      ],
+      "pattern": "^([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$"
+    },
     "metadata-application": {
       "type": "object",
       "title": "BOM Metadata",
@@ -367,6 +412,7 @@
         "group",
         "name",
         "version",
+        "hashes",
         "purl"
       ],
       "additionalProperties": false,
@@ -415,6 +461,14 @@
           "$ref": "#/definitions/version",
           "title": "Component Version",
           "description": "The component version. The version should ideally comply with semantic versioning but is not enforced"
+        },
+        "hashes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hash"
+          },
+          "title": "Hashes",
+          "description": "The hashes of the docker image"
         },
         "purl": {
           "type": "string",
@@ -605,6 +659,7 @@
         "mime-type",
         "bom-ref",
         "name",
+        "version",
         "properties",
         "components"
       ],
@@ -638,6 +693,11 @@
           "examples": [
             "tomcat-catalina"
           ]
+        },
+        "version": {
+          "$ref": "#/definitions/version",
+          "title": "Component Version",
+          "description": "The component version. The version should ideally comply with semantic versioning but is not enforced."
         },
         "properties": {
           "type": "array",
@@ -707,6 +767,7 @@
         "mime-type",
         "bom-ref",
         "name",
+        "version",
         "components"
       ],
       "additionalProperties": false,
@@ -736,6 +797,11 @@
           "type": "string",
           "title": "Component Name",
           "description": "The name of the component. This will often be a shortened, single name of the component. Examples: commons-lang3 and jquery"
+        },
+        "version": {
+          "$ref": "#/definitions/version",
+          "title": "Component Version",
+          "description": "The component version. The version should ideally comply with semantic versioning but is not enforced."
         },
         "components": {
           "type": "array",
@@ -822,6 +888,7 @@
         "mime-type",
         "bom-ref",
         "name",
+        "version",
         "components"
       ],
       "additionalProperties": false,
@@ -851,6 +918,11 @@
           "type": "string",
           "title": "Component Name",
           "description": "The name of the component. This will often be a shortened, single name of the component. Examples: commons-lang3 and jquery"
+        },
+        "version": {
+          "$ref": "#/definitions/version",
+          "title": "Component Version",
+          "description": "The component version. The version should ideally comply with semantic versioning but is not enforced."
         },
         "components": {
           "type": "array",
@@ -937,6 +1009,7 @@
         "mime-type",
         "bom-ref",
         "name",
+        "version",
         "components"
       ],
       "additionalProperties": false,
@@ -966,6 +1039,11 @@
           "type": "string",
           "title": "Component Name",
           "description": "The name of the component. This will often be a shortened, single name of the component. Examples: commons-lang3 and jquery"
+        },
+        "version": {
+          "$ref": "#/definitions/version",
+          "title": "Component Version",
+          "description": "The component version. The version should ideally comply with semantic versioning but is not enforced."
         },
         "components": {
           "type": "array",
@@ -1052,6 +1130,7 @@
         "mime-type",
         "bom-ref",
         "name",
+        "version",
         "components"
       ],
       "additionalProperties": false,
@@ -1081,6 +1160,11 @@
           "type": "string",
           "title": "Component Name",
           "description": "The name of the component. This will often be a shortened, single name of the component. Examples: commons-lang3 and jquery"
+        },
+        "version": {
+          "$ref": "#/definitions/version",
+          "title": "Component Version",
+          "description": "The component version. The version should ideally comply with semantic versioning but is not enforced."
         },
         "components": {
           "type": "array",

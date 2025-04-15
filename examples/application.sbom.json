@@ -40,6 +40,7 @@
       "type": "application",
       "mime-type": "application/vnd.qubership.service",
       "name": "key-manager",
+      "version": "master-20250210.074231-75",
       "properties": [
         {
           "name": "git_branch",
@@ -58,6 +59,12 @@
           "name": "key-manager-assembly-release-2023.1-7.10.0",
           "group": "cloud-core",
           "version": "build22",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "0af86284290a31b9b4d6d0fa6710584a8f6016a0155c8dc9951a317c81938d91"
+            }
+          ],
           "purl": "pkg:docker/cloud-core/key-manager-assembly-release-2023.1-7.10.0@build22?registry_id=sandbox?repository_id=targetSnapshot"
         },
         {
@@ -138,9 +145,14 @@
       "type": "application",
       "mime-type": "application/vnd.qubership.service",
       "name": "identity-provider",
+      "version": "master-20250210.074231-76",
       "properties": [
         {
           "name": "git_branch",
+          "value": "PSUPCLFRM-8157"
+        },
+        {
+          "name": "git_revision",
           "value": "PSUPCLFRM-8157"
         },
         {
@@ -156,6 +168,12 @@
           "name": "identity-provider-assembly-psupclfrm-8157",
           "group": "cloud-core",
           "version": "build3",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "0af86284290a31b9b4d6d0fa6710584a8f6016a0155c8dc9951a317c81938d91"
+            }
+          ],
           "purl": "pkg:docker/cloud-core/identity-provider-assembly-psupclfrm-8157@build3?registry_id=sandbox?repository_id=snapshotUri"
         },
         {
@@ -236,6 +254,7 @@
       "type": "application",
       "mime-type": "application/vnd.qubership.configuration.smartplug",
       "name": "smartplug-sample-plugin",
+      "version": "master-20250210.074231-74",
       "components": [
         {
           "bom-ref": "BomRef.297500793532955.6255622644092922",
@@ -253,6 +272,7 @@
       "type": "application",
       "mime-type": "application/vnd.qubership.configuration",
       "name": "dmp-api-docs",
+      "version": "master-20250210.074231-73",
       "components": [
         {
           "bom-ref": "BomRef.3377598499922374.09983633256578817",
@@ -270,6 +290,7 @@
       "type": "application",
       "mime-type": "application/vnd.qubership.configuration.cdn",
       "name": "<component-name>",
+      "version": "master-20250210.074231-72",
       "components": [
         {
           "bom-ref": "BomRef.5171571098165817.9800475266194008",
@@ -287,6 +308,7 @@
       "type": "application",
       "mime-type": "application/vnd.qubership.configuration.frontend",
       "name": "<component-name>",
+      "version": "master-20250210.074231-71",
       "components": [
         {
           "bom-ref": "BomRef.136844110261647.2004074270598808",
