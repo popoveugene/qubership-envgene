@@ -363,14 +363,14 @@ global: &id002
 | `artifacts[].version` | yes | string |   | `''` |   |
 | `deploy_param` | yes | string | always `''` | `''` | None |
 | `docker_digest` | yes | string | Хэш сумма докер имаджа сервиса полученная с помощью `SHA-256` алгоритма | None | `.components[?name=<service-name>][?mime-type=application/vnd.docker.image].hashes[0].content` |
-| `docker_registry` | FUUUUUUCK |  |  |  |  |
+| `docker_registry` |  |  | FUUUUUUCK |  |  |
 | `docker_repository_name` | yes | string | Репозиторий в реджестри где расположен докер имадж | None | `.components[?name=<service-name>].docker_repository_name` |
 | `docker_tag` | yes | string | Версия докер имаджа сервиса | None | `.components[?name=<service-name>].version` |
-| `full_image_name` | FUUUUUUCK docker_registry+docker_repository_name+name+version |  |  |  |  |
+| `full_image_name` |  |  | FUUUUUUCK docker_registry+docker_repository_name+name+version |  |  |
 | `git_branch` | yes | string | Имя ветки репозитория в котором проходил билд сеервиса | None | `.components[?name=<service-name>].version.properties[?name=git_branch].value` |
 | `git_revision` | yes | string | Хэш сумма коммита который привел к билдк сервиса | None | `.components[?name=<service-name>].version.properties[?name=git_revision].value` |
-| `git_url` | FUUUUUUCK |  |  |  |  |
-| `image` | FUUUUUUCK docker_registry+docker_repository_name+name+version |  |  |  |  |
+| `git_url` |  |  | FUUUUUUCK |  |  |
+| `image` |  |  | FUUUUUUCK docker_registry+docker_repository_name+name+version |  |  |
 | `image_name` | yes | string | Имя докер имаджа сервиса | None | `.components[?name=<service-name>].name` |
 | `image_type` | yes | string | TBD | None | `.components[?name=<service-name>].version.properties[?name=image_type].value` |
 | `name` | yes | string | Имя сервиса | None | `<service-name>` |
