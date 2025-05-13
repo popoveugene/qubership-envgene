@@ -396,8 +396,7 @@ Common Predefined Parameters:
 | `maven_repository` | yes | string | None | None | `.components[?name=<service-name>].components[].properties[?name=maven_repository].value` |
 | `name` | yes | string | Service name | None | `<service-name>` |
 | `service_name` | yes | string | Service name | None | `<service-name>` |
-| `tArtifactNames` | yes | hashmap | None | `''` |  | !!!
-| `tArtifactNames.resources` | no | string | None | None |  | !!!
+| `tArtifactNames` | yes | hashmap | always `{}` | `{}` | None |
 | `type` | no | string | None | None | `.components[?name=<service-name>].components[].properties[?name=type].value` |
 | `version` | yes | string | Service version | None | `.components[?name=<service-name>].version` |
 
