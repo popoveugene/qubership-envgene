@@ -371,7 +371,7 @@ Common Predefined Parameters:
 
 | Attribute | Mandatory | Type | Description | Default | Source in Application SBOM |
 |---|---|---|---|---|---|
-| `artifact` | no | string | artifact ID of [Primary Service Artifact](#version-20-primary-service-artifact) | None |
+| `artifact` | no | string | artifact ID of [Primary Service Artifact](#version-20-primary-service-artifact) | None | None |
 | `artifact.artifactId` | no | string | artifact ID of [Primary Service Artifact](#version-20-primary-service-artifact) | None | `<primary-service-artifact>.artifactId`|
 | `artifact.groupId` | no | string | group ID of [Primary Service Artifact](#version-20-primary-service-artifact)  | None | `<primary-service-artifact>.groupId` |
 | `artifact.version` | no | string | version of [Primary Service Artifact](#version-20-primary-service-artifact)  | None | `<primary-service-artifact>.version`|
